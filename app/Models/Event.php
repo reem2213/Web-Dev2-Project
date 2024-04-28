@@ -9,7 +9,7 @@ class Event extends Model
 {
     use HasFactory;
     public function getUser(){
-        return $this->belongsTo(UserAuth::class,'user_id','id');
+        return $this->belongsTo(User::class,'user_id','id');
     }
     public function getStore(){
         return $this->belongsTo(Store::class,'store_id','id');

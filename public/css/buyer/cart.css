@@ -1,0 +1,93 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Heading Style */
+h3 {
+    color: #333;
+    text-align: center;
+}
+
+/* Alert Styles */
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #dff0d8;
+    border: 1px solid #b2dba1;
+    color: #3c763d;
+}
+
+/* Table Styles */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #f5f5f5;
+}
+
+/* Quantity Input Styles */
+.input-group {
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.quantity-input {
+    width: 50px;
+    text-align: center;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    user-select: none;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-outline-secondary {
+    color: #6c757d;
+    background-color: transparent;
+    border-color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+    color: #333;
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}

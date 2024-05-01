@@ -13,16 +13,13 @@ return new class extends Migration
     {
         Schema::create('shop_carts', function (Blueprint $table) {
             $table->id();
-            $table->double('unit_price');
-            $table->integer('quantity');
-            $table->double('total_price');
+            $table->string('image');
+            $table->string('price');
+            $table->string('quantity');
+            $table->string('totalPrice');
 
-            //fk:productId
             $table->foreignId('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreignId('store_id')->references('id')->on('stores')->onDelete('cascade');
-
-
-
             $table->timestamps();
         });
     }

@@ -1,9 +1,9 @@
 <?php
-
+ 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+ 
 return new class extends Migration
 {
     /**
@@ -14,16 +14,16 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->longText('image');
+            $table->string('image');
             $table->integer('quantity');
             $table->double('price');
-            $table->longText('description');
+            $table->string('description');
             $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreignId('store_id')->references('id')->on('stores')->onDelete('cascade');
             $table->timestamps();
         });
     }
-
+ 
     /**
      * Reverse the migrations.
      */

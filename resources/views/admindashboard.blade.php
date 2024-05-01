@@ -8,7 +8,7 @@
     <!--  -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!--  -->
-    <link rel="stylesheet" href="{{asset('admincss/cssadmin')}}">
+    <link rel="stylesheet" href="{{asset('css/admin/cssadmin.css')}}">
 </head>
 <body>
     <div class="sidebar">

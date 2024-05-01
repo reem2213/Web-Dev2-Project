@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Notifications\newpassnotification;
 use App\Models\Store;
-use App\Models\UserAuth;
+use App\Models\User;
 
 
 class admindashboardcontroller extends Controller
@@ -19,8 +19,8 @@ class admindashboardcontroller extends Controller
             // Get data for the dashboard
             
             $storesscount=Store::where('Accepted', 1)->count();
-            $sellerscount=UserAuth::where('role', 'seller')->count();
-            $buyerscount=UserAuth::where('role', 'buyer')->count();
+            $sellerscount=User::where('role', 'seller')->count();
+            $buyerscount=User::where('role', 'buyer')->count();
 
             return view('admindashboard', compact('storesscount','sellerscount','buyerscount'));
         }
@@ -33,18 +33,18 @@ class admindashboardcontroller extends Controller
         
         public function sellers(){
 
-            $seller= UserAuth::where('role', 'seller')->get();
+            $seller= User::where('role', 'seller')->get();
             return view('sellerview')-> with('all',$seller);
         }
         public function buyers(){
 
-            $buyer= UserAuth::where('role', 'buyer')->get();
+            $buyer= User::where('role', 'buyer')->get();
             return view('buyerview')-> with('all',$buyer);
         }
 
         public function update(Request $request, int $id){
 
-            $obj= UserAuth::find($id);
+            $obj= User::find($id);
             $obj->password=$request->thepass;
             $obj->save();
 
@@ -52,17 +52,17 @@ class admindashboardcontroller extends Controller
         }
         public function edit(string $id)
         {
-            $obj= UserAuth::find($id);
+            $obj= User::find($id);
             return view('editingpassword')->with('all',$obj);
         }
         public function editpass(string $id)
         {
-            $obj= UserAuth::find($id);
+            $obj= User::find($id);
             return view('editingpasswordbuyer')->with('all',$obj);
         }
         public function updatepass(Request $request, int $id){
 
-            $obj= UserAuth::find($id);
+            $obj= User::find($id);
             $obj->password=$request->thepass;
             $obj->save();
 

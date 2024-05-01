@@ -29,8 +29,6 @@ Route::get('activatestore/{id}',[activatestore::class,'activate']);
 
 
 Route::get('deactivatestore/{id}',[admindashboardcontroller::class,'deactivatedStores']);
-// Route::post('toggle-store/{storeId}',[admindashboardcontroller::class,'toggleStore'])->name('admin.toggle-store');
-// Route::post('reset-password/{userId}',[admindashboardcontroller::class,'resetPassword'])->name('admin.reset-password');
 
 
 Route::resource('request',storerequestcontroller::class);

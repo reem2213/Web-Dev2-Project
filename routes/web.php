@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Support\Facades\Facade;
 
 use App\Http\Controllers\FirstController;
@@ -26,7 +27,9 @@ Route::get('page1',function(){
 
     return "my age is 20!";
 
+
 });
+
 
 
 
@@ -68,6 +71,3 @@ Route::get('/cart/{store_id}', [CartController::class, 'showCart'])->name('cart.
 Route::patch('/cart/update/{id}', [CartController::class, 'updateCart'])->name('cart.update');
 
 Route::delete('/cart/{store_id}/{product_id}',[CartController::class, 'deleteCartItem'])->name('cart.delete');
-
-
-

@@ -9,10 +9,7 @@ class Store extends Model
 {
     use HasFactory;
 
-    public function getUsers(){
-        return $this->belongsTo(User::class,'user_id','id');
-
-    }
+  
 
     public function follows()
     {
@@ -29,6 +26,10 @@ class Store extends Model
     }
      public function getItem(){
         return $this->hasOne(ShoppingCart::class);
+
+    public function getUser(){
+        return $this->belongsTo(User::class,'user_id','id');
+
     }
 
 }

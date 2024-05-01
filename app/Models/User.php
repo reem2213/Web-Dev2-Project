@@ -1,18 +1,33 @@
+
 <?php
 
 namespace App\Models;
-
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
-    public function getStores(){
+    
+
+    public function getStore(){
         return $this->hasMany(Store::class);
+    }
+
+    public function getOrders(){
+        return $this->hasMany(Order::class);
+    }
+    public function getEvent(){
+        return $this->hasMany(Event::class);
+    }
+    public function getReview(){
+        return $this->hasMany(Review::class);
     }
 
     /**
@@ -21,9 +36,14 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'password',
+        'phoneNo',
+        'role',
+        'provider_id',
+        'provider',
+        'provider_token'
     ];
 
     /**
@@ -47,5 +67,18 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public static function generateUsername($username){
+
+        if($username ===null){
+            $username=Str::lower(Str::random(8));
+        }
+        if(User::where('username',$username)->exists()){
+            $newUsername=$username.Str::lower(Str::random(3));
+            $username=self::generateUsername($newUsername);
+        }
+        return $username;
+
     }
 }

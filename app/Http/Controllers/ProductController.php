@@ -146,6 +146,7 @@ class ProductController extends Controller
         $product->delete();
         return back();
 
+
     }
 
     public function destroy_store($store_id){

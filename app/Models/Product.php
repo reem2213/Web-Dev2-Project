@@ -8,12 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    public function getCategory(){
-        return $this->belongsTo(Category::class,'category_id','id');
-    }
-    public function getStore(){
-        return $this->belongsTo(Store::class,'category_id','id');
-    }
+
+
+
     public function getEvent(){
         return $this->hasOne(Event::class);
     }
@@ -21,6 +18,20 @@ class Product extends Model
     public function getOrders()
     {
         return $this->belongsToMany(Order::class)->withPivot('quantity');
+    }
+
+
+    public function category(){
+        return $this->belongsTo(Category::class,'category_id','id');
+
+    }
+    public function getStores(){
+        return $this->belongsTo(Store::class,'store_id','id');
+
+    }
+    public function getCart(){
+        return $this->belongsTo(ShoppingCart::class,'shop_cart_id','id');
+
     }
 
 }

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('status'); //failed...
 
             //fk: cart_item_id
-            $table->foreignId('cart_item_id')->references('id')->on('shopping_carts')->onDelete('cascade');
+            $table->foreignId('cart_item_id')->references('id')->on('shop_carts')->onDelete('cascade');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
 
 

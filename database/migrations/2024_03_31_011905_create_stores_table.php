@@ -19,10 +19,7 @@ return new class extends Migration
             $table->longText('description');
             $table->integer('phoneNo');
             $table->boolean('Accepted')->default(false);
-
-            //fk: userId
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-
             $table->timestamps();
         });
     }

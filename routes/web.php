@@ -238,6 +238,7 @@ use App\Http\Controllers\storerequestcontroller;
 use App\Http\Controllers\activatestore;
  
 //listsellers
+//reem
  
 Route::get('admin',[admindashboardcontroller::class,'index'])->name('admin');
 Route::get('list',[admindashboardcontroller::class,'listing'])->name('listStores');

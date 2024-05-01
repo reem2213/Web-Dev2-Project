@@ -28,13 +28,13 @@ class HomeController extends Controller
 
         switch ($user->role) {
             case 'admin':
-                return view('Admin/adminPanel');
+                return view('admindashboard');
             case 'seller':
-                return view('Seller.home'); // Dashboard view for sellers
+                return view('sellercategory/mystores'); // Dashboard view for sellers
             case 'buyer':
-                return view('Buyer.home');  // Dashboard view for buyers
+                return view('Buyer.Home');  // Dashboard view for buyers
             default:
-                return view('home');        // Default view for other roles
+                return view('welcome');        // Default view for other roles
         }
     }
 }

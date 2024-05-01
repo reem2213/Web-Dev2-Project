@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -170,7 +171,6 @@
             <span class="count">0</span>
           </button></a>
 
-          <a href="{{ route('cart.show') }}">
 
 
           <button class="action-btn">
@@ -221,6 +221,7 @@
 
           <li class="menu-category">
             <a href="{{ route('contactUs') }}" class="menu-title">Contact Us</a>
+            @extends('layouts.app')
 
             
           </li>

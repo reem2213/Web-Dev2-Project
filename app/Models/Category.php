@@ -13,7 +13,6 @@ class Category extends Model
         'store_id'
     ];
 
-    protected $fillable=['name','store_id'];
 
     public function getStore(){
         return $this->belongsTo(Store::class,'store_id','id');

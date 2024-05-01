@@ -39,33 +39,30 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function login(Request $request){
-        $credentials=$request->validate([
-            'email'=>'required|email',
-            'password'=>'required'
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
         ]);
 
-        if(Auth::attempt($credentials)){
-            $user_role=Auth::user()->role;
+        if (Auth::attempt($credentials)) {
+            $user_role = Auth::user()->role;
 
-            switch($user_role){
+            switch ($user_role) {
                 case 'admin':
-                    return redirect('admin');
-                    break;
+                    return redirect()->route('admin');
 
                 case 'seller':
-                    return redirect('admin');
-                    break;
+                    return view('sellercategory/mystores'); // Dashboard view for sellers
 
                 case 'buyer':
-                    return redirect('admin');
-                    break;
+                    return view('Buyer.Home');  // Dashboard view for buyers
                 default:
-                Auth::logout();
-                return redirect('/home')->with(['oopsss']);  
+                    Auth::logout();
+                    return redirect('/home')->with(['oopsss']);
             }
-        }
-        else{
+        } else {
             return redirect('login');
         }
     }

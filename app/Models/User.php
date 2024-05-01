@@ -11,6 +11,9 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    public function getStores(){
+        return $this->hasMany(Store::class);
+    }
 
     /**
      * The attributes that are mass assignable.

@@ -1,0 +1,59 @@
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cart-table th, .cart-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.cart-table th {
+  background-color: #f4f4f4;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-input {
+  width: 60px;
+  text-align: center;
+  margin: 0 5px;
+}
+
+.btn-outline-secondary {
+  padding: 5px 10px;
+  color: #333;
+  border-color: #ccc;
+}
+
+.btn-danger {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+@media (max-width: 600px) {
+  .cart-table, .cart-table thead, .cart-table tbody, .cart-table th, .cart-table td, .cart-table tr { 
+      display: block; 
+  }
+
+  .cart-table th, .cart-table td {
+      text-align: right;
+      padding-left: 50%;
+      position: relative;
+  }
+
+  .cart-table th::before, .cart-table td::before {
+      position: absolute;
+      left: 6px;
+      width: 45%;
+      padding-right: 10px;
+      white-space: nowrap;
+      content: attr(data-label);
+      text-align: left;
+  }
+}

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Buyer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use App\Models\ShopCart;
+use App\Models\ShoppingCart;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -30,7 +30,7 @@ class CartController extends Controller
         }
 
         //create
-        ShopCart::updateOrCreate(
+        ShoppingCart::updateOrCreate(
             ['product_id' => $product->id, 'store_id' => $storeId],
             [
                 'image' => $product->image,
@@ -48,7 +48,7 @@ class CartController extends Controller
     public function updateCart(Request $request, Product $product, $id)
     {
         // Retrieve the cart item from the database
-        $cartItem = ShopCart::findOrFail($id);
+        $cartItem = ShoppingCart::findOrFail($id);
 
         // Update the quantity based on the request input
         $newQuantity = $request->input('quantity', 1);
@@ -67,7 +67,7 @@ class CartController extends Controller
     public function showCart(Request $request, $store_id)
     {
         $cart = $request->session()->get("cart_" . $store_id, []);
-        $cartItems = ShopCart::with('product')  // Adjust this line if your relationship name is different
+        $cartItems = ShoppingCart::with('product')  // Adjust this line if your relationship name is different
             ->where('store_id', $store_id)
             ->whereIn('product_id', array_keys($cart))
             ->get();
@@ -86,7 +86,7 @@ class CartController extends Controller
         }
 
         // Remove the item from the database
-        $deleted = ShopCart::where('store_id', $store_id)
+        $deleted = ShoppingCart::where('store_id', $store_id)
             ->where('product_id', $product_id)
             ->delete();
 

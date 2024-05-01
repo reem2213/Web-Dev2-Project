@@ -1,13 +1,5 @@
 <?php
 
-use App\Http\Controllers\BotmanController;
-use App\Http\Controllers\Buyer\CartController;
-use App\Http\Controllers\Buyer\FollowController;
-use App\Http\Controllers\Buyer\HomeeController;
-use App\Http\Controllers\Buyer\StoreController;
-use App\Http\Controllers\HomeController;
-
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Facade;
 
 use App\Http\Controllers\FirstController;

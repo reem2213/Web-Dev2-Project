@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('image');
             $table->string('name');
+
             $table->string('address');
             $table->string('description');
             $table->string('phoneNo');
             $table->boolean('Accepted')->default(0);
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

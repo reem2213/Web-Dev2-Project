@@ -21,7 +21,7 @@ return new class extends Migration
 
             //fk: cart_item_id
             $table->foreignId('cart_item_id')->references('id')->on('shopping_carts')->onDelete('cascade');
-            $table->foreignId('user_id')->references('id')->on('user_auths')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
 
 
             $table->timestamps();

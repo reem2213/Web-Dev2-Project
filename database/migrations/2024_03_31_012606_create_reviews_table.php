@@ -17,7 +17,7 @@ return new class extends Migration
             $table->longText('comment');
             $table->double('rating');
             //fk :userId (buyer)
-            $table->foreignId('user_id')->references('id')->on('user_auths')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();
         });

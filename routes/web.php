@@ -75,7 +75,7 @@ use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 use Laravel\Socialite\Facades\Socialite;
  
 Route::get('/', function () {
-    return view('auth.login');
+    return view('welcome');
 });
  
 Route::get('/login', function () {

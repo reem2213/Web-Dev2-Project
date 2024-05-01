@@ -1,0 +1,92 @@
+
+/* Yellow theme */
+.container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    min-height: 100vh; /* Ensure full height */
+    background-color: #f1f1f1; /* Yellow background */
+}
+
+.card {
+    border: 0px ; /* Golden border */
+    border-radius: 20px; /* Rounded corners */
+    width: 600px; /* Adjust as needed */
+    height: 600px; /* Limit card width */
+    padding: 20px; /* Add padding */
+    background-color: white;
+}
+
+
+.image{
+    width: 400px;
+    height:250px;
+    margin-left: 120px;
+    position: absolute;
+}
+.card-header {
+
+    color: #FFD700; /* White text */
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 270px;
+    font-weight: 600;
+    margin-left: 130px;
+    font-size: 25px;
+}
+
+.btn-primary {
+    background-color: #FFD700; /* Golden button background */
+  width: 85px;
+  height: 40px;
+    color: #FFFFFF; 
+    margin-top: 80px;
+    border: none;
+    margin-left:450px;/* White text */
+    border-radius: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #FFC72C; /* Darker golden hover */
+    border-color: #FFC72C; /* Darker golden hover */
+}
+
+/* Radio buttons as boxes */
+.radio-container {
+    display: inline-block; /* Display inline */
+    margin-right: 20px; 
+    font-family: Arial, Helvetica, sans-serif;
+
+    margin-left: 130px;
+    margin-top: 50px;/* Add spacing between radio buttons */
+}
+
+input[type="radio"] {
+    display: inline-block; /* Display inline */
+    vertical-align: middle; /* Align vertically */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 2px solid #FFD700; /* Golden border */
+    border-radius: 50%; /* Make the border circular */
+    width: 20px; /* Adjust as needed */
+    height: 20px; /* Adjust as needed */
+    outline: none;
+    font-family: Arial, Helvetica, sans-serif;
+
+
+}
+.users{
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+input[type="radio"]:checked {
+    border: 7px solid #FFD700; /* Golden border */
+    /* Golden background when checked */
+}
+
+.image{
+    width: 350px;
+    height: 300px;
+    margin-top: -50px;
+}

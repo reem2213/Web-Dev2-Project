@@ -33,7 +33,7 @@ class SellerController extends Controller
             $file = $request->file('image');
             $extention=$file->getClientOriginalExtension();
             $filename=time().'.'.$extention;
-            $path='assets/uploads/stores/';
+            $path='assets/uploads/';
             $file->move($path,$filename);
         }
 

@@ -61,7 +61,7 @@ class ProductController extends Controller
             $file = $request->file('image');
             $extention=$file->getClientOriginalExtension();
             $filename=time().'.'.$extention;
-            $path='assets/uploads/products/';
+            $path='assets/uploads/';
             $file->move($path,$filename);
         }
 
@@ -100,7 +100,7 @@ class ProductController extends Controller
             $file = $request->file('image');
             $extention=$file->getClientOriginalExtension();
             $filename=time().'.'.$extention;
-            $path='assets/uploads/products/';
+            $path='assets/uploads/';
             $file->move($path,$filename);
         }
 
@@ -150,8 +150,8 @@ class ProductController extends Controller
 
     public function destroy_store($store_id){
         $store=Store::findOrFail($store_id);
-
-        $id= $store->seller_id;
+        // return $store;
+        $id=$store->user_id;
 
         if(File::exists($store->image)){
             File::delete($store->image);
@@ -160,6 +160,7 @@ class ProductController extends Controller
         $store->delete();
 
         $stores=Store::get();
+        //
 
         return view('sellercategory.mystores',compact('stores','id'));
 
@@ -190,7 +191,7 @@ class ProductController extends Controller
             $file = $request->file('image');
             $extention=$file->getClientOriginalExtension();
             $filename=time().'.'.$extention;
-            $path='assets/uploads/products/';
+            $path='assets/uploads/';
             $file->move($path,$filename);
         }
 

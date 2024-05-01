@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Store extends Model
 {
     use HasFactory;
+
     public function getUsers(){
         return $this->belongsTo(User::class,'user_id','id');
 
@@ -16,6 +17,7 @@ class Store extends Model
     public function follows()
     {
         return $this->belongsToMany(User::class, 'follows', 'store_id', 'buyer_id');
+
     }
 
     public function getCategories(){

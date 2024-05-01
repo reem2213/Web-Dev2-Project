@@ -9,6 +9,8 @@ class Product extends Model
 {
     use HasFactory;
 
+
+
     public function getEvent(){
         return $this->hasOne(Event::class);
     }

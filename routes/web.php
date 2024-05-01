@@ -70,3 +70,4 @@ Route::patch('/cart/update/{id}', [CartController::class, 'updateCart'])->name('
 Route::delete('/cart/{store_id}/{product_id}',[CartController::class, 'deleteCartItem'])->name('cart.delete');
 
 
+

@@ -13,16 +13,13 @@ return new class extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
+            $table->string('image');
             $table->string('name');
-            $table->longText('image');
-            $table->string('address')->nullable();
-            $table->longText('description');
-            $table->integer('phoneNo');
-            $table->boolean('Accepted')->default(false);
-
-            //fk: userId
-            $table->foreignId('user_id')->references('id')->on('user_auths')->onDelete('cascade');
-
+            $table->string('address');
+            $table->string('description');
+            $table->string('phoneNo');
+            $table->boolean('Accepted')->default(0);
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

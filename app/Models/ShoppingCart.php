@@ -8,15 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class ShoppingCart extends Model
 {
     use HasFactory;
-    // public function items()
-    // {
-    //     return $this->hasMany(ShoppingCartItem::class);
-    // }
-    public function getProduct(){
-        return $this->belongsToMany(Product::class,'product_id','id');
+    protected $fillable=['image','price','quantity','totalPrice','product_id','store_id'];
+
+    public function getProducts(){
+        return $this->hasMany(Product::class);
     }
-    public function getStore(){
-        return $this->belongsToMany(Store::class,'store_id','id');
+    public function product() {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+    public function getStores(){
+        return $this->belongsTo(Product::class,'store_id','id');
     }
     
 }

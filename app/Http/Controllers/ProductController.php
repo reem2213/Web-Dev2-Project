@@ -160,7 +160,6 @@ class ProductController extends Controller
         $store->delete();
 
         $stores=Store::get();
-        //
 
         return view('sellercategory.mystores',compact('stores','id'));
 

@@ -37,9 +37,8 @@ Route::get('page1',function(){
 });
 
 
-Auth::routes();
 
-Route::get('/homee', [HomeeController::class, 'index'])->name('homee');
+Route::get('/homee', [HomeeController::class, 'index'])->name('home');
 
 
 Route::get('/welcome', [HomeeController::class, 'anotherPage'])->name('welcome');

@@ -15,6 +15,7 @@
     - custom css link
   -->
   <link rel="stylesheet" href="{{asset('css/buyer/stores.css')}}">
+  
     <!--
     - google font link
   -->

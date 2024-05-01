@@ -35,11 +35,7 @@ Route::get('page1',function(){
     return "my age is 20!";
 
 });
-Route::get('/',function(){
 
-    return view('chatbot');
-
-});
 
 Auth::routes();
 

@@ -10,12 +10,12 @@
   <!--
     - favicon
   -->
-  <link rel="shortcut icon" href="./assets/images/logo/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="{{asset('assets/buyer/logo/favicon.ico')}}" type="image/x-icon">
 
   <!--
     - custom css link
   -->
-  <link rel="stylesheet" href="./assets/css/style-prefix.css">
+  <link rel="stylesheet" href="{{asset('css/buyer/style-prefix.css')}}">
 
   <!--
     - google font link
@@ -143,7 +143,7 @@
       <div class="container">
 
         <a href="#" class="header-logo">
-          <img src="./assets/images/logo.png"  width="100" height="80">
+        <img src="{{asset('assets/buyer/logo.png')}}"  width="100" height="80">
         </a>
 
         <div class="header-search-container">
@@ -158,7 +158,7 @@
 
         <div class="header-user-actions">
         <button class="action-btn">
-            <img src="./assets/images/chat.png" class="icons"/>
+        <img src="{{asset('assets/buyer/chat.png')}}" class="icons"/>
           </button>
 
           
@@ -166,7 +166,7 @@
           <button class="action-btn">
           <a href="{{ route('notifications') }}">
 
-            <img src="./assets/images/iconsNotification.png" class="icons"/>
+          <img src="{{asset('assets/buyer/iconsNotification.png')}}" class="icons"/>
             <span class="count">0</span>
           </button></a>
 
@@ -332,7 +332,7 @@
 
           <div class="slider-item">
 
-            <img src="./assets/images/bg3.2.png" alt="women's latest fashion sale" class="banner-img">
+          <img src="{{asset('assets/buyer/bg3.2.png')}}" alt="women's latest fashion sale" class="banner-img">
 
             <div class="banner-content">
                 <h2 class="welcome1">Discover Your Ultimate Shopping Destination</h2>
@@ -510,7 +510,7 @@
 
       <div class="container">
 
-        <img src="./assets/images/payment.png" alt="payment method" class="payment-img">
+      <img src="{{asset('assets/buyer/payment.png')}}" alt="payment method" class="payment-img">
 
         <p class="copyright">
           Copyright &copy; <a href="#">Anon</a> all rights reserved.
@@ -530,7 +530,7 @@
   <!--
     - custom js link
   -->
-  <script src="./assets/js/script.js"></script>
+  <script src="{{asset('js/buyer/script.js')}}"></script>
 
   <!--
     - ionicon link

@@ -10,13 +10,13 @@
     <!--
     - favicon
   -->
-  <link rel="shortcut icon" href="{{asset('assets/buyer/logo/favicon.ico')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('assets/buyer/logo/favicon.ico')}}" type="image/x-icon">
 
     <!--
     - custom css link
   -->
-  <link rel="stylesheet" href="{{asset('css/buyer/stores.css')}}">
-  <link rel="stylesheet" href="{{asset('css/buyer/storeDetails.css')}}">
+    <link rel="stylesheet" href="{{asset('css/buyer/stores.css')}}">
+    <link rel="stylesheet" href="{{asset('css/buyer/storeDetails.css')}}">
 
 
     <!--
@@ -144,7 +144,7 @@
             <div class="container">
 
                 <a href="#" class="header-logo">
-                <img src="{{asset('assets/buyer/logo.png')}}"  width="100" height="80">
+                    <img src="{{asset('assets/buyer/logo.png')}}" width="100" height="80">
                 </a>
 
                 <div class="header-search-container">
@@ -159,7 +159,7 @@
 
                 <div class="header-user-actions">
                     <button class="action-btn">
-                    <img src="{{asset('assets/buyer/chat.png')}}" class="icons"/>
+                        <img src="{{asset('assets/buyer/chat.png')}}" class="icons" />
                     </button>
 
 
@@ -167,7 +167,7 @@
                     <button class="action-btn">
                         <a href="{{ route('notifications') }}">
 
-                        <img src="{{asset('assets/buyer/iconsNotification.png')}}" class="icons"/>
+                            <img src="{{asset('assets/buyer/iconsNotification.png')}}" class="icons" />
                             <span class="count">0</span>
                     </button></a>
 
@@ -332,7 +332,7 @@
 
                     <div class="slider-item">
 
-                    <img src="{{asset('assets/buyer/bg3.2.png')}}" alt="women's latest fashion sale" class="banner-img">
+                        <img src="{{asset('assets/buyer/bg3.2.png')}}" alt="women's latest fashion sale" class="banner-img">
 
                         <div class="banner-content">
                             <h2 class="welcome1">Explore Our Stores
@@ -358,44 +358,49 @@
 
             <section>
                 <h1 class="myStoresTitle">MY STORE Details</h1>
-
-                <div class="grid-container">
-                    <!-- Left Column for Buttons and Categories -->
-                    <div class="grid-left">
-                        <a href="{{ route('store.show', ['id' => $store->id]) }}" class="btn btn-primary">All Products</a>
-                        <button class="btn btn-primary" onclick="toggleCategories()">Categories</button>
-                        <div id="categoryDropdown" style="display: none;">
-                            <select id="categorySelect" onchange="filterByCategory(this.value)">
-                                <option value="">Select Category</option>
-                                @foreach($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                <div class="grid-left">
+                    <a href="{{ route('store.show', ['id' => $store->id]) }}" class="btn btn-primary">All Products</a>
+                    <button class="btn btn-primary" onclick="toggleCategories()">Categories</button>
+                    <div id="categoryDropdown" style="display: none;">
+                        <select id="categorySelect" onchange="filterByCategory(this.value)">
+                            <option value="">Select Category</option>
+                            @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
-
-                    <!-- Right Column for Product List -->
-                    <div class="grid-right">
-                        <h3>Products</h3>
-                        <div class="products-container">
-                            @foreach($products as $product)
-                            <div class="product-box">
+                </div>
+                <div class="grid-container">
+                    <div class="stores-grid">
+                        @foreach($products->take(6) as $product) <div class="store-card">
+                            <img src="{{ $product->image }}" />
+                            <div class="store-details">
                                 <h4>{{ $product->name }}</h4>
-                                <img src="{{ $product->image }}" alt="Product image" />
                                 <p>{{ $product->quantity }} available - ${{ $product->price }}</p>
-                                <form action="{{ route('cart.add', ['product' => $product->id]) }}" method="POST" class="add-to-cart-form">
-                                    @csrf
+
+
+                                <form action="{{ route('cart.add', ['product' => $product->id]) }}" method="POST" class="add-to-cart-form"> @csrf
                                     <button class="add-to-cart">Add to Cart</button>
                                 </form>
                             </div>
-                            @endforeach
                         </div>
+                        @endforeach
                     </div>
-
-
                 </div>
 
                 <script>
+                    function toggleVisibility() {
+    const cards = document.querySelectorAll('.store-card');
+    cards.forEach((card, index) => {
+        if (index >= 6) {
+            card.style.display = card.style.display === 'none' ? 'block' : 'none';
+        }
+    });
+    // Update button text based on visibility
+    const button = document.querySelector('.show-more');
+    button.textContent = button.textContent === 'Show More' ? 'Show Less' : 'Show More';
+}
+
                     function toggleCategories() {
                         var dropdown = document.getElementById("categoryDropdown");
                         dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
@@ -567,7 +572,7 @@
 
                     <div class="container">
 
-                    <img src="{{asset('assets/buyer/payment.png')}}" alt="payment method" class="payment-img">
+                        <img src="{{asset('assets/buyer/payment.png')}}" alt="payment method" class="payment-img">
 
                         <p class="copyright">
                             Copyright &copy; <a href="#">Anon</a> all rights reserved.
@@ -587,7 +592,7 @@
             <!--
     - custom js link
   -->
-  <script src="{{asset('js/buyer/script.js')}}"></script>
+            <script src="{{asset('js/buyer/script.js')}}"></script>
 
             <!--
     - ionicon link

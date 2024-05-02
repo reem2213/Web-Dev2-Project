@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Database\Seeders\Buyer\CategorySeeder;
+use Database\Seeders\Buyer\ProductSeeder;
 use Database\Seeders\Buyer\StoreSeeder;
 use Database\Seeders\Buyer\UserSeeder;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -18,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
 
            
-        StoreSeeder::class
+        ProductSeeder::class
 
 
         ]);

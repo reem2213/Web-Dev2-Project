@@ -20,7 +20,6 @@ return new class extends Migration
             $table->timestamps();
 
             //fk: productId, userId, storeId
-            // $table->foreignId('user_id')->references('id')->on('user_auths')->onDelete('cascade');
             $table->foreignId('store_id')->references('id')->on('stores')->onDelete('cascade');
             $table->foreignId('product_id')->references('id')->on('products')->onDelete('cascade');
 

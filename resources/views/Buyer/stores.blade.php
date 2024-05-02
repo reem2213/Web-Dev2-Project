@@ -9,19 +9,21 @@
     <!--
     - favicon
   -->
-  <link rel="shortcut icon" href="{{asset('assets/buyer/logo/favicon.ico')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('assets/buyer/logo/favicon.ico')}}" type="image/x-icon">
 
     <!--
     - custom css link
   -->
-  <link rel="stylesheet" href="{{asset('css/buyer/stores.css')}}">
-  
+    <link rel="stylesheet" href="{{asset('css/buyer/stores.css')}}">
+
     <!--
     - google font link
   -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 
 <body>
@@ -140,7 +142,7 @@
             <div class="container">
 
                 <a href="#" class="header-logo">
-                <img src="{{asset('assets/buyer/logo.png')}}"  width="100" height="80">
+                    <img src="{{asset('assets/buyer/logo.png')}}" width="100" height="80">
                 </a>
 
                 <div class="header-search-container">
@@ -155,7 +157,7 @@
 
                 <div class="header-user-actions">
                     <button class="action-btn">
-                    <img src="{{asset('assets/buyer/chat.png')}}" class="icons"/>
+                        <img src="{{asset('assets/buyer/chat.png')}}" class="icons" />
                     </button>
 
 
@@ -163,7 +165,7 @@
                     <button class="action-btn">
                         <a href="{{ route('notifications') }}">
 
-                        <img src="{{asset('assets/buyer/iconsNotification.png')}}" class="icons"/>
+                            <img src="{{asset('assets/buyer/iconsNotification.png')}}" class="icons" />
                             <span class="count">0</span>
                     </button></a>
 
@@ -324,7 +326,7 @@
             <div class="container">
                 <div class="slider-container has-scrollbar">
                     <div class="slider-item">
-                    <img src="{{asset('assets/buyer/bg3.2.png')}}" alt="women's latest fashion sale" class="banner-img">
+                        <img src="{{asset('storage/images/stores.png')}}"  class="banner-img">
                         <div class="banner-content">
                             <h2 class="welcome1">Explore Our Stores
                             </h2>
@@ -361,27 +363,29 @@
                     });
                 });
             </script>
-
-
             <section>
                 <h1 class="myStoresTitle">ALL STORES</h1>
 
                 <div class="stores-grid">
                     @foreach($store as $s)
                     <div class="store-card">
-                        <img src="{{$s->image}}" width="100px" height="100px" />
+                        <img src="{{$s->image}}" class="store-image" />
                         <div class="store-details">
                             <h2 class="store-name">{{ $s->name }}</h2>
-                            <p class="store-address">{{ $s->address }}</p>
                             <p class="store-description">{{ $s->description }}</p>
-                            <p class="store-phone">{{ $s->phoneNo }}</p>
-                            
-                            <button class="follow-bttn">Follow</button>
-                            <a href="{{ route('store.show', ['id' => $s->id]) }}" class="explore-button">Explore -></a>
+                            <div class="sawa">
+                                <p class="store-address"><i class="material-icons" style="font-size:30px;color:#1753d3">location_on</i>
+{{ $s->address }}</p>
+                                <p class="store-phone"><i class="material-icons" style="font-size:30px;color:#1753d3">phone</i>
+{{ $s->phoneNo }}</p>
+                            </div>
+
+
+                            <a href="{{ route('store.show', ['id' => $s->id]) }}" class="follow-bttn">Explore -></a>
                         </div>
                     </div>
                     @endforeach
-                    
+
                 </div>
 
             </section>
@@ -543,7 +547,7 @@
 
                     <div class="container">
 
-                    <img src="{{asset('assets/buyer/payment.png')}}" alt="payment method" class="payment-img">
+                        <img src="{{asset('assets/buyer/payment.png')}}" alt="payment method" class="payment-img">
 
                         <p class="copyright">
                             Copyright &copy; <a href="#">Anon</a> all rights reserved.
@@ -563,7 +567,7 @@
             <!--
     - custom js link
   -->
-  <script src="{{asset('js/buyer/script.js')}}"></script>
+            <script src="{{asset('js/buyer/script.js')}}"></script>
 
             <!--
     - ionicon link

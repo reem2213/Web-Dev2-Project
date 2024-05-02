@@ -42,7 +42,7 @@
                                     @endif
                                     <p class="btn btn-signup"> Dont have an account?
 
-                                        <a class="signup" href="{{ route('register') }}">
+                                        <a class="signup" href="{{ route('select.role') }}">
                                             {{ __('Signup') }}
                                         </a>
                                     </p>

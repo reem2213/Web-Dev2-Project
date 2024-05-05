@@ -3,7 +3,7 @@
 
 <head>
     <title>Shopping Cart</title>
-    <link rel="stylesheet" href="{{ asset('assets/css/cart.css') }}">
+    <link rel="stylesheet" href="{{asset('css/buyer/shopCart.css')}}">
 </head>
 
 <body>

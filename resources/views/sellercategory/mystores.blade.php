@@ -50,6 +50,8 @@
             <div class="circle-avatar"></div>
 
         </div>
+        @extends('layouts.app')
+
     </div>
     {{-----------------------------------body-----------------------------------}}
 

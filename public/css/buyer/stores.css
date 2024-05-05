@@ -991,7 +991,19 @@ padding-left: 15px;
 padding-top: 10px;
 border-radius: 15px;
 margin-left: 70px;
+margin-bottom: 5px;
 }
+.follow-bttnn{
+  background-color:hsl(221, 80%, 46%); 
+  color: white;
+  font-size: 15px;
+  width: 100px;
+  height: 45px;
+  padding-left: 20px;
+  padding-top: 10px;
+  border-radius: 15px;
+  margin-left:70px;
+  }
 .menu-title:active{
 background-color: #0056b3;
 

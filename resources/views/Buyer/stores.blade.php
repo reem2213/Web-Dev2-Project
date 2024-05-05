@@ -326,7 +326,7 @@
             <div class="container">
                 <div class="slider-container has-scrollbar">
                     <div class="slider-item">
-                        <img src="{{asset('storage/images/stores.png')}}"  class="banner-img">
+                        <img src="{{asset('storage/images/stores.png')}}" class="banner-img">
                         <div class="banner-content">
                             <h2 class="welcome1">Explore Our Stores
                             </h2>
@@ -375,20 +375,50 @@
                             <p class="store-description">{{ $s->description }}</p>
                             <div class="sawa">
                                 <p class="store-address"><i class="material-icons" style="font-size:30px;color:#1753d3">location_on</i>
-{{ $s->address }}</p>
+                                    {{ $s->address }}
+                                </p>
                                 <p class="store-phone"><i class="material-icons" style="font-size:30px;color:#1753d3">phone</i>
-{{ $s->phoneNo }}</p>
+                                    {{ $s->phoneNo }}
+                                </p>
                             </div>
 
 
                             <a href="{{ route('store.show', ['id' => $s->id]) }}" class="follow-bttn">Explore -></a>
+                            @if (Auth::check() && Auth::user()->role === 'buyer')
+    @if ($s->isFollowedBy(Auth::user()))
+        <a href="{{ route('store.unfollow', ['storeId' => $s->id]) }}" class="follow-bttnn">Unfollow</a>
+    @else
+        <a href="{{ route('store.follow', ['storeId' => $s->id]) }}" class="follow-bttnn">Follow</a>
+    @endif
+@endif
+
                         </div>
                     </div>
+    <script>
+    @if(session('followed') !== null && session('storeId') !== null)
+        var storeId = "{{ session('storeId') }}";
+        var followButton = document.getElementById('follow_button_' + storeId);
+        var unfollowButton = document.getElementById('unfollow_button_' + storeId);
+        if (followButton && unfollowButton) {
+            if ({{ session('followed') }}) {
+                followButton.style.display = 'none';
+                unfollowButton.style.display = 'inline-block';
+            } else {
+                followButton.style.display = 'inline-block';
+                unfollowButton.style.display = 'none';
+            }
+        }
+    @endif
+</script>
+
+
+
                     @endforeach
 
                 </div>
 
             </section>
+
 
 
 

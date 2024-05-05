@@ -13,20 +13,30 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
-    
 
-    public function getStore(){
+
+    public function getStore()
+    {
         return $this->hasMany(Store::class);
     }
 
-    public function getOrders(){
+    public function getOrders()
+    {
         return $this->hasMany(Order::class);
     }
-    public function getEvent(){
+    public function getEvent()
+    {
         return $this->hasMany(Event::class);
     }
-    public function getReview(){
+    public function getReview()
+    {
         return $this->hasMany(Review::class);
+    }
+
+    // User.php
+    public function follows()
+    {
+        return $this->belongsToMany(Store::class, 'follows', 'user_id', 'store_id')->withTimestamps();
     }
 
     /**
@@ -68,16 +78,16 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
-    public static function generateUsername($username){
+    public static function generateUsername($username)
+    {
 
-        if($username ===null){
-            $username=Str::lower(Str::random(8));
+        if ($username === null) {
+            $username = Str::lower(Str::random(8));
         }
-        if(User::where('username',$username)->exists()){
-            $newUsername=$username.Str::lower(Str::random(3));
-            $username=self::generateUsername($newUsername);
+        if (User::where('username', $username)->exists()) {
+            $newUsername = $username . Str::lower(Str::random(3));
+            $username = self::generateUsername($newUsername);
         }
         return $username;
-
     }
 }

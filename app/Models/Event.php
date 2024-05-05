@@ -20,9 +20,10 @@ class Event extends Model
     public function getUser(){
         return $this->belongsTo(User::class,'user_id','id');
     }
-    public function getStore(){
-        return $this->belongsTo(Store::class,'store_id','id');
-    }
+    public function store()
+{
+    return $this->belongsTo(Store::class);
+}
     public function getProduct(){
         return $this->belongsTo(Product::class,'product_id','id');
     }

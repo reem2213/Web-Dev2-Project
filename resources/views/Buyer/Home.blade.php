@@ -201,6 +201,7 @@
             <a href="{{ route('home') }}" class="menu-title">Home</a>
           </li>
 
+          
           <li class="menu-category">
             <a href="{{ route('stores') }}" class="menu-title">Stores</a>
 

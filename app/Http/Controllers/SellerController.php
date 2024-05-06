@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\File;
 class SellerController extends Controller
 {
     public function index(int $id){
-        $stores=Store::get();
+        // $stores=Store::all($id);
+        $stores = Store::where('user_id', $id)->get();
         return view('sellercategory.mystores',compact('stores','id'));
     }
 

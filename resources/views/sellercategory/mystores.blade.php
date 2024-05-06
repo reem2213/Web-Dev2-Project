@@ -48,7 +48,6 @@
             <button class="button-85 button-851" id="create_new_event"><a href="{{url('create_events/'.$id)}}"> + Create New Event</a></button>
             <button class="button-85" id="create_new_store"><a href="{{url('mystore/create/'.$id)}}"> + Create New Store</a></button>
             <div class="circle-avatar"></div>
-
         </div>
         @extends('layouts.app')
 
@@ -57,25 +56,27 @@
 
     {{-----------------------------------store cards-----------------------------------}}
     <div class="store-cards">
+    @if (empty($stores))
+ 
+ @else
 
-        @foreach ($stores as $store)
-            <div class="card">
-            <img class="card__img" src="{{asset($store->image)}}">
-            <div class="card__content">
-                <div class="card__text-wrapper">
-                    <h1 class="card__header">{{$store->name}}</h1>
-                    <p class="card__text">{{$store->description}}</p>
-                </div>
-                {{-- <button class="card__btn" ><a href="{{url('enter_store/'.$store->id.'/'.$id)}}">Edit</a><span>&rarr;</span></button> --}}
-                <button class="card__btn" ><a href="{{url('enter_store',['id' =>$store->id])}}">Edit</a><span>&rarr;</span></button>
-            </div>
-        </div>
-        @endforeach
+     @foreach ($stores as $store)
+
+     <div class="card">
+         <img class="card__img" src="{{asset($store->image)}}">
+         <div class="card__content">
+             <div class="card__text-wrapper">
+                 <h1 class="card__header">{{$store->name}}</h1>
+                 <p class="card__text">{{$store->description}}</p>
+             </div>
+             {{-- <button class="card__btn" ><a href="{{url('enter_store/'.$store->id.'/'.$id)}}">Edit</a><span>&rarr;</span></button> --}}
+             <button class="card__btn" ><a href="{{url('enter_store',['id' =>$store->id])}}">Edit</a><span>&rarr;</span></button>
+         </div>
+     </div>
+     @endforeach
+ @endif
 
     </div>
-
-
-
     <script src="{{asset('js/seller_js/mystore.js')}}"></script>
 </body>
 </html>

@@ -20,6 +20,7 @@ class LoginController extends Controller
     |
     */
 
+
     use AuthenticatesUsers;
 
     /**
@@ -38,7 +39,6 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -48,13 +48,14 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user_role = Auth::user()->role;
+            $user_id = Auth::user()->id;
 
             switch ($user_role) {
                 case 'admin':
                     return redirect()->route('admin');
 
                 case 'seller':
-                    return view('sellercategory/mystores'); // Dashboard view for sellers
+                    return redirect('mystore/'.$user_id); // Dashboard view for sellers
 
                 case 'buyer':
                     return view('Buyer.Home');  // Dashboard view for buyers

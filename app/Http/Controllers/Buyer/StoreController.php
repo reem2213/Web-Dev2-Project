@@ -28,7 +28,7 @@ class StoreController extends Controller
     public function index()
     {
         $stores = Store::where('Accepted', 1)->get();
-                return view('Buyer.stores')->with('store', $stores);
+        return view('Buyer.stores')->with('store', $stores);
     }
 
     /**

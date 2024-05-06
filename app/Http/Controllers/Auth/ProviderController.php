@@ -11,6 +11,16 @@ use Laravel\Socialite\Facades\Socialite;
 class ProviderController extends Controller
 {
 
+
+
+    public function googlePage()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function googlecallback()
+    {
+    }
     public function redirect($provider)
     {
 
@@ -22,7 +32,7 @@ class ProviderController extends Controller
 
         try {
             $SocialUser = Socialite::driver($provider)->user();
-           
+
             $user = User::where([
                 'provider_id' => $SocialUser->id,
                 'provider' => $provider
@@ -34,7 +44,7 @@ class ProviderController extends Controller
                 // Assuming Google's API sends phone numbers, extract like below (This is hypothetical)
                 $phoneNumber = $SocialUser->phoneNumber ?? null;
             }
-              // Make sure 'defaultRole' is a valid role or handle this case appropriately
+            // Make sure 'defaultRole' is a valid role or handle this case appropriately
 
             if ($user) {
                 Auth::login($user);
@@ -48,13 +58,13 @@ class ProviderController extends Controller
                     'provider_token' => $SocialUser->token,
                     'provider_id' => $SocialUser->getId(),
                     'provider' => $provider,
-                    'role'=>$role,
-                    'phoneNo'=>$phoneNumber
+                    'role' => $role,
+                    'phoneNo' => $phoneNumber
                 ]);
             }
             Auth::login($user);
 
-            return redirect('/home');
+            return response()->json(['doneeee']);
         } catch (\Exception $e) {
             return redirect('/login');
         }

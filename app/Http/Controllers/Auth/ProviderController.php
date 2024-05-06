@@ -10,17 +10,6 @@ use Laravel\Socialite\Facades\Socialite;
 
 class ProviderController extends Controller
 {
-
-
-
-    public function googlePage()
-    {
-        return Socialite::driver('google')->redirect();
-    }
-
-    public function googlecallback()
-    {
-    }
     public function redirect($provider)
     {
 
@@ -29,6 +18,7 @@ class ProviderController extends Controller
 
     public function callback($provider)
     {
+        
 
         try {
             $SocialUser = Socialite::driver($provider)->user();
@@ -39,11 +29,7 @@ class ProviderController extends Controller
             ])->first();
 
             $role = session('role', 'defaultRole');
-            $phoneNumber = null;
-            if ($provider == 'google') {
-                // Assuming Google's API sends phone numbers, extract like below (This is hypothetical)
-                $phoneNumber = $SocialUser->phoneNumber ?? null;
-            }
+           
             // Make sure 'defaultRole' is a valid role or handle this case appropriately
 
             if ($user) {
@@ -52,14 +38,12 @@ class ProviderController extends Controller
                 return redirect('/home');
             } else {
                 $user = User::create([
-                    'name' => $SocialUser->getName(),
                     'username' => User::generateUsername($SocialUser->getNickname()),
                     'email' => $SocialUser->getEmail(),
                     'provider_token' => $SocialUser->token,
                     'provider_id' => $SocialUser->getId(),
                     'provider' => $provider,
                     'role' => $role,
-                    'phoneNo' => $phoneNumber
                 ]);
             }
             Auth::login($user);
@@ -67,6 +51,7 @@ class ProviderController extends Controller
             return response()->json(['doneeee']);
         } catch (\Exception $e) {
             return redirect('/login');
+            
         }
     }
 }

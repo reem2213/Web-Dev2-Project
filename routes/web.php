@@ -174,6 +174,8 @@ Route::get('stop_order/{order_id}', [SellerController::class, 'stop_order']);
 Route::get('start_order/{order_id}', [SellerController::class, 'start_order']);
 //stop an order have been started
 Route::get('reject_order/{order_id}', [SellerController::class, 'reject_order']);
+//update seller info
+Route::put('update_seller_info', [SellerController::class, 'update_seller_info']);
 
 
 /*=========================Seller store main page/*=========================*/

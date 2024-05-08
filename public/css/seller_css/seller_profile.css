@@ -490,10 +490,152 @@ label[for=nav-footer-toggle] {
 .profile_body{
     width: 70%;
     margin: 0 auto;
-    border: 2px solid red;
+    /* border: 2px solid red; */
 }
 
 a{
     color: inherit;
     text-decoration: none;
+}
+
+.illustration{
+    margin-top: 100px;
+    background-color: var(--seller-primary);
+    border-radius: 15px;
+    width: 100%;
+    height: 30vh;
+    display: flex;
+    /* border: 5px solid green; */
+    justify-content: space-around;
+}
+
+.illustration_img{
+    width: 450px;
+    height: 500px;
+    /* border: 5px solid red; */
+    margin-top: -150px;
+}
+
+.welcome_name{
+    /* border:5px solid red; */
+    font-size: 2.5rem;
+    color: white;
+    font-weight: bold;
+    line-height: 50px;
+    margin-bottom: 20px;
+}
+
+.welcome_text{
+    margin-top: 0;
+    color: white;
+}
+
+.seller_profile_cards{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+.seller_profile_card{
+    height: 30vh;
+    width: 30%;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.seller_profile_card_main{
+    height: 30vh;
+    width: 30%;
+    background-color: var(--seller-primary);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.seller_profile_create_store{
+    background-color: var(--seller-primary);
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    padding: 1em;
+    border-radius: 30px;
+    border: 2px solid white;
+    align-self: center;
+    width: 60%;
+}
+
+.seller_profile_total_stores{
+    font-size: 2rem;
+    color: white;
+    font-weight: bold;
+    align-self: center;
+}
+
+.seller_profile_total_stores_icon{
+    font-size: 2rem;
+    color: white;
+    font-weight: bold;
+    align-self: center;
+}
+
+.seller_update_profile{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.update_seller_input{
+    margin-right: 3%;
+    margin-left: 2%;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+
+.input_container{
+    display: flex;
+    justify-content: space-between;
+    /* border: 1px solid red; */
+}
+
+.update_seller_input input{
+    padding: 1.5em;
+    border: 1px solid var(--seller-primary);
+    outline: none;
+    background-color: white;
+}
+
+.update_seller_input_img{
+    width: 94%;
+    margin-left: 2%;
+    display: flex;
+    margin-bottom: 50px;
+    background-color: white;
+    border: 1px solid var(--seller-primary);
+    padding: 1em;
+}
+
+.update_seller_input_img input{
+    margin-left: 20px;
+}
+
+.update_seller{
+    margin-left: 2%;
+    width: 100%;
+    display: flex;
+}
+
+.update_seller button{
+    padding: 1em;
+    background-color: var(--seller-primary);
+    outline: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    align-self: center;
+    margin-left: 43%;
 }

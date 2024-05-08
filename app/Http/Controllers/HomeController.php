@@ -25,16 +25,20 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user(); // Get the authenticated user
+        $user_id = Auth::user()->id;
 
-        switch ($user->role) {
-            case 'admin':
-                return view('admindashboard');
-            case 'seller':
-                return view('sellercategory/mystores'); // Dashboard view for sellers
-            case 'buyer':
-                return view('Buyer.Home');  // Dashboard view for buyers
-            default:
-                return view('welcome');        // Default view for other roles
-        }
+            switch ($user->role) {
+                case 'admin':
+                    return redirect()->route('admin');
+
+                case 'seller':
+                    return redirect('mystore/'.$user_id); // Dashboard view for sellers
+
+                case 'buyer':
+                    return view('Buyer.Home');  // Dashboard view for buyers
+                default:
+                    Auth::logout();
+                    return redirect('/home')->with(['oopsss']);
+            }
     }
 }

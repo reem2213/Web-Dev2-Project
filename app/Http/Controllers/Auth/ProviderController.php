@@ -27,6 +27,7 @@ class ProviderController extends Controller
                 'provider_id' => $SocialUser->id,
                 'provider' => $provider
             ])->first();
+            
 
             $role = session('role', 'defaultRole');
            
@@ -38,20 +39,25 @@ class ProviderController extends Controller
                 return redirect('/home');
             } else {
                 $user = User::create([
-                    'username' => User::generateUsername($SocialUser->getNickname()),
+                    'username' => User::generateUsername($SocialUser->getNickname() ? $SocialUser->getNickname() :$SocialUser->getName()),
                     'email' => $SocialUser->getEmail(),
                     'provider_token' => $SocialUser->token,
                     'provider_id' => $SocialUser->getId(),
                     'provider' => $provider,
                     'role' => $role,
                 ]);
+                
             }
             Auth::login($user);
 
-            return response()->json(['doneeee']);
+            return redirect('/home');
         } catch (\Exception $e) {
-            return redirect('/login');
+            return dd($e);
             
         }
     }
+
+ 
+
+
 }

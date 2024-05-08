@@ -9,7 +9,7 @@ use App\Models\Event;
 use App\Models\Order;
 use Illuminate\Support\Facades\File;
 
-class SellerController extends Controller
+class SellerController extends Controller 
 {
     public function index(int $id){
         // $stores=Store::all($id);

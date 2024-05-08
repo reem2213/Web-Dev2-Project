@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('role')->nullable();
             $table->string('provider_id')->nullable();
             $table->string('provider')->nullable();
-            $table->string('provider_token')->nullable();
+            $table->longText('provider_token')->nullable();
 
 
 

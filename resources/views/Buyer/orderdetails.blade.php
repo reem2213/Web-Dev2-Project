@@ -3,12 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Orders Page</title>
-    <link rel="shortcut icon" href="{{asset('assets/buyer/logo/favicon.ico')}}" type="image/x-icon">
-
-    <!--
-    - custom css link
-    -->
+    <title>Order Details</title>
     <link rel="stylesheet" href="{{asset('css/buyer/style-prefix.css')}}">
 </head>
 <body>
@@ -77,57 +72,45 @@
             </div>
         </div>
     </header>
-
     <nav class="desktop-navigation-menu">
         <div class="container">
             <ul class="desktop-menu-category-list">
                 <li class="menu-category">
-                    <a href="{{ route('home') }}" class="menu-title">Home</a>
-                </li>
-                <li class="menu-category">
-                    <a href="{{ route('stores') }}" class="menu-title">Stores</a>
-                </li>
-                <li class="menu-category">
-                    <a href="{{ route('orders') }}" class="menu-title">My Orders</a>
-                </li>
-
-                <li class="menu-category">
-                    <a href="{{ route('events') }}" class="menu-title">Events</a>
-                </li>
-
-                <li class="menu-category">
-                    <a href="{{ route('contactUs') }}" class="menu-title">Contact Us</a>
-                    @extends('layouts.app')
+                    <a href="{{ url('orders')}}" class="menu-title">Back</a>
                 </li>
             </ul>
         </div>
     </nav>
+{{-- {{$orderdetails}} --}}
     <div class="orders_body">
-
-    <div class="card">
-        {{-- {{$orders}} --}}
-        <div class="orders_table">
-            <h2>Table of Orders Made</h2>
-            <ul class="responsive-table">
-                <li class="table-header">
-                    <div class="col col-1">Order ID</div>
-                    <div class="col col-2">Total Amount</div>
-                    <div class="col col-3">User_ID</div>
-                    <div class="col col-4">Payment Status</div>
-                </li>
-                @foreach ($orders as $order)
-                <a href="{{url('order_details/'.$order->id)}}">
-                    <li class="table-row">
-                        <div class="col col-1" data-label="Job Id">{{$order->id}}</div>
-                        <div class="col col-2" data-label="Customer Name">{{$order->total_amount}}</div>
-                        <div class="col col-3" data-label="Amount">{{$order->user_id}}</div>
-                        <div class="col col-4" data-label="Payment Status">{{$order->status}}</div>
+        <div class="card">
+            {{-- {{$orders}} --}}
+            <div class="orders_table">
+                <h2>Table of Orders Made</h2>
+                <ul class="responsive-table">
+                    <li class="table-header">
+                        <div class="col col-1">Product ID</div>
+                        <div class="col col-2">Name</div>
+                        <div class="col col-3">Quantity</div>
+                        <div class="col col-4">Price</div>
+                        <div class="col col-4">Category Id</div>
                     </li>
-                </a>
+                    @foreach ($products as $product)
+                        @if ($orderdetails->product_id == $product->id)
+                            <li class="table-row">
+                                <div class="col col-1" data-label="Job Id">{{$product->id}}</div>
+                                <div class="col col-2" data-label="Customer Name">{{$product->name}}</div>
+                                <div class="col col-3" data-label="Amount">{{$product->quantity}}</div>
+                                <div class="col col-4" data-label="Payment Status">{{$product->price}}</div>
+                                <div class="col col-4" data-label="Payment Status">{{$product->category_id}}</div>
+                            </li>
+                        @endif
+                    @endforeach
+                    {{-- {{$orderdetails}}
+                    {{$products}} --}}
 
-                @endforeach
-
-            </ul>
+                </ul>
+            </div>
         </div>
     </div>
 </body>

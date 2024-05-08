@@ -4,6 +4,15 @@
 <head>
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="{{asset('css/buyer/shopCart.css')}}">
+    <style>
+        .return_from_cart{
+            font-size: 2rem;
+            color: black;
+            text-decoration: underline;
+            font-weight: bold;
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <!-- {{$cart}} -->
@@ -14,10 +23,11 @@
         {{ session('success') }}
     </div>
     @endif
+    <a href="{{url('stores/'.$store_id)}}" class="return_from_cart">Back</a>
     <table class="table cart-table">
         <thead>
             <tr>
-                <th>Image</th>
+                <th>Image{{$store_id}}</th>
                 <th>Product Name</th>
                 <th>Price</th>
 
@@ -63,7 +73,7 @@
                 function updateQuantity(itemId, action) {
                     const formElement = document.getElementById('updateQuantityForm' + itemId);
                     const quantityInput = formElement.querySelector('input[name="quantity"]');
-                    const totalPriceElement = document.getElementById('totalPrice' + itemId); 
+                    const totalPriceElement = document.getElementById('totalPrice' + itemId);
 
                     let newQuantity = parseInt(quantityInput.value);
 

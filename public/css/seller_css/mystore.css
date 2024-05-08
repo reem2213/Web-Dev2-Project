@@ -13,6 +13,16 @@
     text-decoration: none;
 }
 
+.chat_img{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    height: 50px;
+    width: 50px;
+    margin: 30px;
+    z-index: 10;
+}
+
 html, body {
     margin: 0;
     background: var(--seller-background);

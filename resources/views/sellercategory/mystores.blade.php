@@ -53,11 +53,13 @@
 
     </div>
     {{-----------------------------------body-----------------------------------}}
-
+    <a href="{{url('chatify')}}">
+        <img src="{{asset('assets/buyer/chat1.png')}}" alt="" class="chat_img">
+    </a>
     {{-----------------------------------store cards-----------------------------------}}
     <div class="store-cards">
     @if (empty($stores))
- 
+
  @else
 
      @foreach ($stores as $store)

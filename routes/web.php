@@ -121,6 +121,7 @@ Route::get('/homee', [HomeeController::class, 'index'])->name('home');
 
 Route::get('/events', [HomeeController::class, 'eventPage'])->name('events');
 Route::get('/orders', [HomeeController::class, 'orderPage'])->name('orders');
+Route::get('/order_details/{order_id}', [HomeeController::class, 'orderDetails'])->name('order_details');
 Route::get('/stores', [StoreController::class, 'index'])->name('stores');
 Route::get('/stores/{id}', [StoreController::class, 'show'])->name('store.show');
 

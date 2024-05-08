@@ -34,7 +34,6 @@ class UserSeeder extends Seeder
             'password'=>'buyer11',
             'phoneNo'=>'70113698',
             'role'=>'buyer'
-
         ]);
 
         User::create([

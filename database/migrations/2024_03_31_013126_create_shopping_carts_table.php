@@ -20,6 +20,9 @@ return new class extends Migration
 
             $table->foreignId('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreignId('store_id')->references('id')->on('stores')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            
+
             $table->timestamps();
         });
     }

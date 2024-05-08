@@ -5,9 +5,8 @@
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="{{asset('css/buyer/shopCart.css')}}">
 </head>
-
 <body>
-
+    <!-- {{$cart}} -->
     <h3>Shopping Cart</h3>
 
     @if(session('success'))
@@ -31,13 +30,11 @@
         @foreach($cart as $item)
     <tr>
         <td>
-            <!-- Assuming 'product' is the relationship name and 'image_url' is the column name for the image -->
             @if($item->product && $item->product->image)
             <img src="{{$item->product->image}}" />
             @endif
         </td>
         <td>
-            <!-- Displaying product name -->
             {{ $item->product ? $item->product->name : 'Product name not available' }}
         </td>
         <td>${{ number_format($item->price, 2) }}</td>
@@ -66,7 +63,7 @@
                 function updateQuantity(itemId, action) {
                     const formElement = document.getElementById('updateQuantityForm' + itemId);
                     const quantityInput = formElement.querySelector('input[name="quantity"]');
-                    const totalPriceElement = document.getElementById('totalPrice' + itemId); // Total price <td> element
+                    const totalPriceElement = document.getElementById('totalPrice' + itemId); 
 
                     let newQuantity = parseInt(quantityInput.value);
 
@@ -93,7 +90,7 @@
                             if (response.ok) {
                                 console.log('Quantity updated successfully');
                                 // Update the total price displayed in the <td> element
-                                const pricePerItem = parseFloat('{{ $item['price'] }}'); // Get the price per item from the backend
+                                const pricePerItem = parseFloat("{{ $item['price'] }}"); // Get the price per item from the backend
                                 const newTotalPrice = pricePerItem * newQuantity;
                                 totalPriceElement.textContent = `$${newTotalPrice.toFixed(2)}`;
                             } else {
@@ -109,7 +106,6 @@
             @endforeach
         </tbody>
     </table>
-
     {{-- Check if store_id is set, if not, you might want to set a default or handle differently --}}
     @php
     $store_id = $store_id ?? 'default_store_id'; // Set to a default or manage how you wish

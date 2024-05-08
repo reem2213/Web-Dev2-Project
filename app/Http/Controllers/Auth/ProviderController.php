@@ -50,10 +50,11 @@ class ProviderController extends Controller
             }
             Auth::login($user);
 
-            return redirect()->route('home');
+            return redirect('/home');
         } catch (\Exception $e) {
+
+
             return dd($e);
-            
         }
     }
 

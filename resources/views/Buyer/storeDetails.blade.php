@@ -202,7 +202,7 @@
                     </li>
 
                     <li class="menu-category">
-                        <a href="{{ route('welcome') }}" class="menu-title">Stores</a>
+                        <a href="{{ route('stores') }}" class="menu-title">Stores</a>
 
 
                     </li>
@@ -373,8 +373,8 @@
                 <div class="grid-container">
                     <div class="stores-grid">
                         @foreach($products->take(6) as $product) <div class="store-card">
-                            <img src="{{ $product->image }}" />
-                            <div class="store-details">
+                            <img src="{{asset( $product->image )}}" width="100px" height="100px" />
+                            <div class="store-}}details">
                                 <h4>{{ $product->name }}</h4>
                                 <p>{{ $product->quantity }} available - ${{ $product->price }}</p>
 

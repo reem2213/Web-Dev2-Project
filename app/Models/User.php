@@ -39,6 +39,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Store::class, 'follows', 'user_id', 'store_id')->withTimestamps();
     }
 
+    public function shopCart(){
+        return $this->hasMany(ShoppingCart::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

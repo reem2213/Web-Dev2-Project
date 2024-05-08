@@ -13,6 +13,8 @@ class CartController extends Controller
 
     public function addToCart(Request $request, Product $product)
     {
+        $user = $request->user(); // Retrieve the authenticated user
+
         $storeId = $product->store_id;
         $storeCartKey = "cart_" . $storeId;
         $cart = $request->session()->get($storeCartKey, []);
@@ -29,9 +31,9 @@ class CartController extends Controller
             ];
         }
 
-        //create
+        
         ShoppingCart::updateOrCreate(
-            ['product_id' => $product->id, 'store_id' => $storeId],
+            ['product_id' => $product->id, 'store_id' => $storeId, 'user_id' => $user->id],
             [
                 'image' => $product->image,
                 'name' => $product->name,
@@ -42,7 +44,7 @@ class CartController extends Controller
         );
 
         $request->session()->put($storeCartKey, $cart);
-        return redirect()->route('cart.show', ['store_id' => $storeId])->with('success', 'Product added to cart!');
+        return redirect()->route('cart.show', ['store_id' => $storeId, 'user_id' => $user->id])->with('success', 'Product added to cart!');
     }
 
     public function updateCart(Request $request, Product $product, $id)
@@ -66,23 +68,31 @@ class CartController extends Controller
 
     public function showCart(Request $request, $store_id)
     {
+        // return $request;
+        // return $store_id;
+        $user = $request->user(); // Retrieve the authenticated user
+        // return $user;
         $cart = $request->session()->get("cart_" . $store_id, []);
-        $cartItems = ShoppingCart::with('product')  // Adjust this line if your relationship name is different
-            ->where('store_id', $store_id)
-            ->whereIn('product_id', array_keys($cart))
-            ->get();
+        // Schema::create('stores', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('name');
+        //     $table->string('location')->nullable();
+        //     $table->timestamps();
+        // });
 
+        $cartItems = ShoppingCart::with('product') 
+            ->where('store_id', $store_id)
+            ->where('user_id', $user->id)
+            ->get();
+        // return $cartItems;
         return view('Buyer.ShoppingCart', ['cart' => $cartItems, 'store_id' => $store_id]);
     }
-
-
     public function deleteCartItem(Request $request, $store_id, $product_id)
     {
-        // Remove the item from the session cart
         $cart = $request->session()->get("cart" . $store_id, []);
         if (array_key_exists($product_id, $cart)) {
-            unset($cart[$product_id]); // Remove the item from the cart array
-            $request->session()->put("cart" . $store_id, $cart); // Update the session with the modified cart
+            unset($cart[$product_id]); 
+            $request->session()->put("cart" . $store_id, $cart);
         }
 
         // Remove the item from the database

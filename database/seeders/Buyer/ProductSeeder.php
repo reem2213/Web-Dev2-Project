@@ -20,7 +20,9 @@ class ProductSeeder extends Seeder
             'price' => 4.5,
             'description' => 'description of twix',
             'category_id' => 7,
-            'store_id' => 2
+            'store_id' => 2,
+          
+
         ]);
 
         Product::create([
@@ -30,7 +32,8 @@ class ProductSeeder extends Seeder
             'price' => 7.5,
             'description' => 'description of kinder',
             'category_id' => 7,
-            'store_id' => 2
+            'store_id' => 2,
+            
         ]);
         Product::create([
             'name' => 'Ferrero rocher',
@@ -723,7 +726,7 @@ class ProductSeeder extends Seeder
             'price' => 4.5,
             'description' => 'description of Sandals wedges',
             'category_id' => 13,
-            'store_id' => 3
+            'store_id' => 3,
         ]);
     }
 }

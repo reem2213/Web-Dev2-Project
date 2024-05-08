@@ -200,7 +200,7 @@
                     </li>
 
                     <li class="menu-category">
-                        <a href="{{ route('welcome') }}" class="menu-title">Stores</a>
+                        <a href="{{ route('stores') }}" class="menu-title">Stores</a>
 
 
                     </li>

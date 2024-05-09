@@ -219,6 +219,7 @@ Route::delete('/cart/{store_id}/{product_id}', [CartController::class, 'deleteCa
 use App\Http\Controllers\admindashboardcontroller;
 use App\Http\Controllers\storerequestcontroller;
 use App\Http\Controllers\activatestore;
+use App\Http\Controllers\BotmanController;
 
 //listsellers
 //reem
@@ -249,3 +250,13 @@ Route::get('deactivatestore/{id}', [admindashboardcontroller::class, 'deactivate
 
 
 Route::resource('request', storerequestcontroller::class);
+
+
+
+//chatbot
+Route::match(['get','post'],'botman',[BotmanController::class,'handle']);
+Route::get('/chatbot',function(){
+
+    return view('chatbot');
+
+});

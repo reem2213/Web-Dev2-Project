@@ -13,6 +13,7 @@ use App\Http\Controllers\Buyer\CartController;
 use App\Http\Controllers\Buyer\HomeeController;
 use App\Http\Controllers\Buyer\StoreController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\StripePaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,14 @@ use App\Http\Controllers\HomeController;
 |
 */
 
+Route::controller(StripePaymentController::class)->group(function () {
+    Route::get('stripe','stripe')->name('stripe.index');
+    Route::post('stripe/checkout','stripeCheckout')->name('stripe.checkout');
+    Route::get('stripe/checkout/success','stripeCheckoutSuccess')->name('stripe.checkout.success');
+});
+
+
+
 
 Auth::routes([
     'verify' => true
@@ -32,6 +41,7 @@ Auth::routes([
 
 
 Route::get('/homee', [HomeeController::class, 'index'])->name('home');
+Route::get('/refresh_shoppingcart', [CartController::class, 'refresh_shoppingcart']);
 
 
 Route::get('/welcome', [HomeeController::class, 'anotherPage'])->name('welcome');

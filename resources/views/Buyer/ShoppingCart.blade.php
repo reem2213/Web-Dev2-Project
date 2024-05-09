@@ -12,6 +12,22 @@
             font-weight: bold;
             color: red;
         }
+        .update_cart{
+            padding: 1em;
+            background-color: #4169E1;
+            color: white;
+            border-radius: 10px;
+            margin-top: 50px;
+            /* border: 1px solid red; */
+            text-decoration: none;
+            position: absolute;
+            top: 400px;
+        }
+        .pay{
+            margin: 20px;
+        }
+
+
     </style>
 </head>
 <body>
@@ -38,36 +54,36 @@
         </thead>
         <tbody>
         @foreach($cart as $item)
-    <tr>
-        <td>
-            @if($item->product && $item->product->image)
-            <img src="{{$item->product->image}}" />
-            @endif
-        </td>
-        <td>
-            {{ $item->product ? $item->product->name : 'Product name not available' }}
-        </td>
-        <td>${{ number_format($item->price, 2) }}</td>
-        <td>
-            <div class="input-group quantity-adjuster">
-                <button class="btn btn-sm btn-outline-secondary" aria-label="Decrease quantity" onclick="updateQuantity({{ $item->id }}, 'decrement')">-</button>
-                <form id="updateQuantityForm{{ $item->id }}" action="{{ route('cart.update', ['id' => $item->id]) }}" method="POST">
+        <tr>
+            <td>
+                @if($item->product && $item->product->image)
+                <img src="{{$item->product->image}}" />
+                @endif
+            </td>
+            <td>
+                {{ $item->product ? $item->product->name : 'Product name not available' }}
+            </td>
+            <td>${{ number_format($item->price, 2) }}</td>
+            <td>
+                <div class="input-group quantity-adjuster">
+                    <button class="btn btn-sm btn-outline-secondary" aria-label="Decrease quantity" onclick="updateQuantity({{ $item->id }}, 'decrement')">-</button>
+                    <form id="updateQuantityForm{{ $item->id }}" action="{{ route('cart.update', ['id' => $item->id]) }}" method="POST">
+                        @csrf
+                        @method('PATCH')
+                        <input type="number" class="form-control quantity-input" name="quantity" value="{{ $item->quantity }}" data-product-id="{{ $item->id }}">
+                    </form>
+                    <button class="btn btn-sm btn-outline-secondary" aria-label="Increase quantity" onclick="updateQuantity({{ $item->id }}, 'increment')">+</button>
+                </div>
+            </td>
+            <td class="total-price" id="totalPrice{{ $item->id }}">${{ number_format($item->price * $item->quantity, 2) }}</td>
+            <td>
+                <form action="{{ route('cart.delete', ['store_id' => $store_id, 'product_id' => $item->product_id]) }}" method="POST">
                     @csrf
-                    @method('PATCH')
-                    <input type="number" class="form-control quantity-input" name="quantity" value="{{ $item->quantity }}" data-product-id="{{ $item->id }}">
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Remove</button>
                 </form>
-                <button class="btn btn-sm btn-outline-secondary" aria-label="Increase quantity" onclick="updateQuantity({{ $item->id }}, 'increment')">+</button>
-            </div>
-        </td>
-        <td class="total-price" id="totalPrice{{ $item->id }}">${{ number_format($item->price * $item->quantity, 2) }}</td>
-        <td>
-            <form action="{{ route('cart.delete', ['store_id' => $store_id, 'product_id' => $item->product_id]) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger">Remove</button>
-            </form>
-        </td>
-    </tr>
+            </td>
+        </tr>
 
             <script>
                 function updateQuantity(itemId, action) {
@@ -116,6 +132,16 @@
             @endforeach
         </tbody>
     </table>
+    {{-- {{$cart}} --}}
+    <a href="{{url('refresh_shoppingcart')}}" class="update_cart">Update Shopping Cart</a>
+
+
+    <form action="{{route('stripe.checkout')}}" method="post" class="pay">
+        @csrf
+        <input type="text" name="products" value="{{$cart}}" style="display: none">
+        <button type="submit">Complete</button>
+    </form>
+
     {{-- Check if store_id is set, if not, you might want to set a default or handle differently --}}
     @php
     $store_id = $store_id ?? 'default_store_id'; // Set to a default or manage how you wish

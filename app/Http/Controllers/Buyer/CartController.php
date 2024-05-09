@@ -31,7 +31,7 @@ class CartController extends Controller
             ];
         }
 
-        
+
         ShoppingCart::updateOrCreate(
             ['product_id' => $product->id, 'store_id' => $storeId, 'user_id' => $user->id],
             [
@@ -66,6 +66,10 @@ class CartController extends Controller
         return response()->json(['success' => true, 'message' => 'Cart item updated successfully']);
     }
 
+    public function refresh_shoppingcart(){
+        return back();
+    }
+
     public function showCart(Request $request, $store_id)
     {
         // return $request;
@@ -80,7 +84,7 @@ class CartController extends Controller
         //     $table->timestamps();
         // });
 
-        $cartItems = ShoppingCart::with('product') 
+        $cartItems = ShoppingCart::with('product')
             ->where('store_id', $store_id)
             ->where('user_id', $user->id)
             ->get();
@@ -91,7 +95,7 @@ class CartController extends Controller
     {
         $cart = $request->session()->get("cart" . $store_id, []);
         if (array_key_exists($product_id, $cart)) {
-            unset($cart[$product_id]); 
+            unset($cart[$product_id]);
             $request->session()->put("cart" . $store_id, $cart);
         }
 

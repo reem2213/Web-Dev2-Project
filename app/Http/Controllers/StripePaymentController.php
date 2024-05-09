@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Stripe;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Http;
+
 
 class StripePaymentController extends Controller
 {
@@ -13,12 +16,17 @@ class StripePaymentController extends Controller
     }
     public function stripeCheckout(Request $request){
         // return $request->products;
+        // return $request->currency;
 
         $productsJson=$request->products;
         $productsArray = json_decode($productsJson, true);
         // return $productsArray[0]['product']['quantity'];
 
+        $apiKey = env('EXCHANGERATE_API_KEY');
+        $response = Http::get("https://v6.exchangerate-api.com/v6/{$apiKey}/latest/USD");
+        $data=$response->json();
 
+        $rate= $data['conversion_rates'][$request->currency];
         $stripe=new \Stripe\StripeClient(env("STRIPE_SECRET"));
         // $redirectUrl=route("stripe.checkout.success").'?session_id{CHECKOUT_SESSION_ID}';
         $redirectUrl=route("stripe.checkout.success") . '?session_id={CHECKOUT_SESSION_ID}';
@@ -29,8 +37,8 @@ class StripePaymentController extends Controller
                     'product_data' => [
                         'name' => $item['product']['name'],
                     ],
-                    'unit_amount' => 100 * $item['product']['price'],
-                    'currency' => 'USD',
+                    'unit_amount' =>round($rate * (100*$item['product']['price'])),
+                    'currency' => $request->currency,
                 ],
                 'quantity' => $item['quantity'],
             ];

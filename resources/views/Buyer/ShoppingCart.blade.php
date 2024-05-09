@@ -139,6 +139,17 @@
     <form action="{{route('stripe.checkout')}}" method="post" class="pay">
         @csrf
         <input type="text" name="products" value="{{$cart}}" style="display: none">
+        <select name="currency" id="">
+            <option value="USD">United State</option>
+            <option value="TOP">Tongan Paʻanga (TOP)</option>
+            <option value="AFN">Afghan Afghani (AFN)</option>
+            <option value="ARS">Argentine Peso (ARS)</option>
+            <option value="AUD">Australian Dollar (AUD)</option>
+            <option value="OMR">Omani Rial (OMR)</option>
+            <option value="NZD">New Zealand Dollar (NZD)</option>
+            <option value="KYD">Cayman Islands Dollar (KYD)</option>
+            <option value="EUR">Euro (EUR)</option>
+        </select>
         <button type="submit">Complete</button>
     </form>
 

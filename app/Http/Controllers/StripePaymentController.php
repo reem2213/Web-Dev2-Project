@@ -7,6 +7,8 @@ use Stripe;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Http;
+use App\Models\OrderDetails;
+use App\Models\Order;
 
 
 class StripePaymentController extends Controller
@@ -42,7 +44,36 @@ class StripePaymentController extends Controller
                 ],
                 'quantity' => $item['quantity'],
             ];
+
+            // OrderDetails::create([
+
+            // ]);
         }
+        $total_amount=0;
+        $user = auth()->user();
+
+        foreach ($productsArray as $item) {
+            $total_amount=$total_amount+100*$item['product']['price'];
+        }
+
+        $myorder=Order::create([
+            'total_amount'=>$total_amount,
+            'status'=>'waiting',
+            'user_id'=>$user->id
+        ]);
+
+
+
+        foreach ($productsArray as $item) {
+            OrderDetails::create([
+                'product_id'=> $item['product']['id'],
+                'order_id'=> $myorder->id,
+            ]);
+        }
+
+
+
+
         // Check if lineItems is empty and handle the case
         // if (empty($lineItems)) {
         //     return 'error';

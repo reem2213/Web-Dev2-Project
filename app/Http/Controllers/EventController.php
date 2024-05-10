@@ -15,6 +15,7 @@ use View;
 use App\Events\GroupCreated;
 use App\Models\Product;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 
@@ -61,17 +62,17 @@ class EventController extends Controller
 
     // get messages of user according find Group     
     public function getMessag1($id)
-{
-    $group = Group::find($id);
-    if (!$group) {
-        return redirect()->back()->with('error', 'Group not found.'); // Handle the error as per your application's requirements
+    {
+        $group = Group::find($id);
+        if (!$group) {
+            return redirect()->back()->with('error', 'Group not found.'); // Handle the error as per your application's requirements
+        }
+
+        // Retrieve all messages for the group
+        $messages = Message::where('group_id', $id)->with('user')->get();
+
+        return view('messages.index', compact('group', 'messages'));
     }
-
-    // Retrieve all messages for the group
-    $messages = Message::where('group_id', $id)->with('user')->get();
-
-    return view('messages.index', compact('group', 'messages'));
-}
 
     public function getMessag($id)
     {
@@ -105,25 +106,25 @@ class EventController extends Controller
                 'message' => 'required',
                 'id' => 'required|exists:groups,id'
             ]);
-    
+
             $group = Group::find($request->id);
             if (!$group) {
                 Log::warning('Group not found', ['group_id' => $request->id]);
                 return response()->json(['error' => 'Group not found'], 404);
             }
-    
+
             // Check if the event is closed
             if ($group->event && $group->event->status === 'closed') {
                 Log::warning('Event is closed, message not sent');
                 return response()->json(['error' => 'Event is closed, message not sent'], 403);
             }
-        
+
             // Check if the user is a buyer and the event has not started yet
             if (auth()->user()->role == 'buyer' && $group->event && $group->event->status === 'pending') {
                 Log::warning('Event has not started yet, message not sent');
                 return response()->json(['error' => 'Event has not started yet, message not sent'], 403);
             }
-    
+
             $productName = '';
             if (auth()->user()->role == 'seller') {
                 $product = Product::find($group->product_id);
@@ -131,7 +132,7 @@ class EventController extends Controller
                     $productName = $product->name;
                 }
             }
-    
+
             $fromUserName = Auth::user()->username;
             $fromUserId = Auth::id();
             $message = Message::create([
@@ -142,7 +143,7 @@ class EventController extends Controller
                 'message' => $request->message . ($productName ? ' - Product: ' . $productName : ''), // Append product name if available
                 'is_read' => 1,
             ]);
-    
+
             Log::info('Message created successfully', ['message_id' => $message->id]);
             return response()->json(['message' => 'Message created', 'content' => $message]);
         } catch (QueryException $ex) {
@@ -153,25 +154,34 @@ class EventController extends Controller
             return response()->json(['error' => 'Server error', 'message' => $ex->getMessage()], 500);
         }
     }
-
-
-
-    public function openEvent(Request $request, $id)
+    public function toggleEventStatus(Request $request, $id)
     {
-        $group = Group::find($id);
-        if (!$group || !$group->status) {
-            return redirect()->back()->with('error', 'Group not found.');
+        try {
+            // Authorize that the user is a seller
+            if (auth()->user()->role !== 'seller') {
+                return redirect()->back()->with('error', 'Unauthorized access.');
+            }
+    
+            $group = Group::findOrFail($id);
+    
+            // Toggle the event status
+            if ($group->status === 'open') {
+                $group->status = 'closed';
+                $message = 'Event closed successfully!';
+            } else {
+                $group->status = 'open';
+                $message = 'Event opened successfully!';
+            }
+    
+            $group->save();
+    
+            // Redirect with success message
+            return redirect()->back()->with('success', $message);
+        } catch (ModelNotFoundException $e) {
+            return redirect()->back()->with('error', 'Event not found.');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while updating the event status.');
         }
-    
-        if (Auth::user()->role !== 'seller') {
-            return redirect()->back()->with('error', 'Unauthorized action.');
-        }
-    
-        $group->event->update(['status' => 'open']);
-    
-        return redirect()->back()->with('success', 'Event has been opened.');
     }
-    
-
     
 }

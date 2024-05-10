@@ -185,6 +185,9 @@ Route::get('/group/members_list/{id}', [GroupController::class, 'members_list'])
 Route::get('/remove_user/{id}/{user_id}', [GroupController::class, 'remove_user']);
 
 
-Route::post('/open-event/{id}', [EventController::class, 'openEvent'])->name('openEvent');
+
+
+Route::post('/toggleEventStatus/{id}', [EventController::class, 'toggleEventStatus'])->name('toggleEventStatus');
+
 
 

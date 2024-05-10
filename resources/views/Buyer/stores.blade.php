@@ -249,7 +249,7 @@
                         <span class="count">0</span>
                     </button>
                     </a>
-                    <a href="{{ route('profile') }}">
+                    <a href="{{ route('profile.edit') }}">
 
                         <button class="action-btn">
                             <ion-icon name="person-outline"></ion-icon>

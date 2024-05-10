@@ -19,6 +19,9 @@ class BotmanController extends Controller
             else{
                 $botman->reply('kindly write hi to start');
             }
+
+            
+            
         });
         $botman->listen();
     }
@@ -28,6 +31,11 @@ class BotmanController extends Controller
         $botman->ask('hello what is ur name',function (Answer $answer){
             $name=$answer->getText();
             $this->say('nice  to meet you'.$name);
+        });
+
+        $botman->ask('do u need help?',function (Answer $answer){
+            $name=$answer->getText();
+            $this->say('okay deal'.$name);
         });
     }
 }

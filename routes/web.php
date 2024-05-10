@@ -213,3 +213,4 @@ Route::post('/toggleEventStatus/{id}', [EventController::class, 'toggleEventStat
 
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit')->middleware('auth');
 Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
+Route::get('/order_details/{order_id}', [HomeeController::class, 'orderDetails'])->name('order_details');

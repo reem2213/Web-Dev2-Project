@@ -1,29 +1,64 @@
+<html>
+<head>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        </head>
+
+<body>
+
 <div class="message-wrapper">
     <ul class="messages">
+        
         @if($group->product)
         <p>Product: {{ $group->product->name }}</p>
         @endif
 
         @if($group->status === 'open')
-    <p>Event is open</p>
-    <!-- Button to close the event, only visible to sellers -->
-    @if(auth()->user()->role === 'seller')
+        <p>Event is open</p>
+        <!-- Display success/error message near event status information -->
+        @if(session('success'))
+        <p class="alert alert-success">{{ session('success') }}</p>
+        @endif
+        @if(session('error'))
+        <p class="alert alert-danger">{{ session('error') }}</p>
+        @endif
+        <!-- Button to close the event, only visible to sellers -->
+        @if(auth()->user()->role === 'seller')
         <form action="{{ route('toggleEventStatus', $group->id) }}" method="POST">
             @csrf
             <button type="submit" class="btn btn-danger">Close Event</button>
         </form>
-    @endif
-@else
-    <p>Event is closed</p>
-    <!-- Button to open the event, only visible to sellers -->
-    @if(auth()->user()->role === 'seller')
+        @endif
+        @else
+        <p>Event is closed</p>
+        <!-- Display success/error message near event status information -->
+        @if(session('success'))
+        <script>
+            Swal.fire({
+                title: 'doneeee!',
+                text: 'Do you want to continue',
+                icon: 'Do you want to continue',
+                confirmButtonText: 'Cool'
+            })
+        </script>
+        @endif
+        @if(session('error'))
+        <script>
+            Swal.fire({
+                title: 'mesh done!',
+                text: 'Do you want to continue',
+                icon: 'Do you want to continue',
+                confirmButtonText: 'Cool'
+            })
+        </script>        @endif
+        <!-- Button to open the event, only visible to sellers -->
+        @if(auth()->user()->role === 'seller')
         <form action="{{ route('toggleEventStatus', $group->id) }}" method="POST">
             @csrf
             <button type="submit" class="btn btn-success">Open Event</button>
         </form>
-    @endif
-@endif
-
+        @endif
+        @endif
 
         @foreach($messages as $message)
         <li class="message clearfix">
@@ -43,6 +78,8 @@
     <input type="text" name="message" id='message' class="submit" {{ $group->status !== 'open' ? 'disabled' : '' }}>
     <input type="hidden" name="id" id='id' class="submit" value='{{$group->id}}'>
 </div>
+
+
 
 
 
@@ -89,3 +126,8 @@
     <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Leave</button>
 </form>
 @endif
+</body>
+
+</html>
+
+

@@ -169,13 +169,16 @@ class EventController extends Controller
         // Determine the action based on the current status
         if ($group->status === 'open') {
             $group->status = 'closed';
-            $message = 'Event closed successfully!';
+            // Retrieve all messages
+            $messages = $group->messages;
 
-            // Retrieve all messages and find the largest number
-            $largestNumber = $this->findLargestNumberInMessages($group->id);
-            // Optional: Perform an action with the largest number
-            $this->performActionWithNumber($largestNumber);
-            
+            // Find the largest number
+            $maxNumber = $messages->reduce(function ($carry, $item) {
+                $number = intval(preg_replace('/[^0-9]/', '', $item->message)); // extract number from string
+                return max($carry, $number);
+            }, 0);
+
+            $message = 'The buyer with the highest offer of ' . $maxNumber . ' won the product.';
         } else {
             $group->status = 'open';
             $message = 'Event opened successfully!';
@@ -183,8 +186,8 @@ class EventController extends Controller
 
         $group->save();
 
-        // Redirect with success message
-        return redirect()->back()->with('success', $message);
+        // Redirect with success message and largest number (if any)
+        return redirect()->route('events')->with('success', $message);
     } catch (ModelNotFoundException $e) {
         return redirect()->back()->with('error', 'Event not found.');
     } catch (Exception $e) {
@@ -192,34 +195,8 @@ class EventController extends Controller
     }
 }
 
-// Helper method to find the largest number in messages
-protected function findLargestNumberInMessages($groupId)
-{
-    $messages = Message::where('group_id', $groupId)->get();
-    $largestNumber = null;
-
-    foreach ($messages as $message) {
-        preg_match_all('/\d+/', $message->message, $numbers);
-        $numbers = array_map('intval', $numbers[0]);
-        if (!empty($numbers)) {
-            $currentMax = max($numbers);
-            if ($largestNumber === null || $currentMax > $largestNumber) {
-                $largestNumber = $currentMax;
-            }
-        }
-    }
-
-    return $largestNumber;
-}
-
-// Optional: A method to perform an action with the found number
-protected function performActionWithNumber($number)
-{
-    if ($number !== null) {
-        // Implement logic depending on what needs to be done with the number
-        Log::info('Performing action with the largest number: ' . $number);
-    }
-}
+    
+    
 
     
 }

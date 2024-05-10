@@ -94,7 +94,6 @@ Route::get('view_events/{seller_id}', [SellerController::class, 'view_events']);
 // view orders
 Route::get('view_orders/{seller_id}', [SellerController::class, 'view_orders']);
 // view notifications
-Route::get('view_notifications/{seller_id}', [SellerController::class, 'view_notifications']);
 // view seller profile
 Route::get('view_profile/{seller_id}', [SellerController::class, 'view_profile']);
 //stop an order have been started
@@ -154,6 +153,7 @@ Route::get('deactivatestore/{id}', [admindashboardcontroller::class, 'deactivate
 Route::resource('request', storerequestcontroller::class);
 
 use App\Http\Controllers\CoinGateController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 
 //crypto routes
@@ -203,14 +203,12 @@ Route::delete('/group/delete/{id}', [GroupController::class, 'deleteGroup']);
 Route::get('/group/members_list/{id}', [GroupController::class, 'members_list']);
 Route::get('/remove_user/{id}/{user_id}', [GroupController::class, 'remove_user']);
 
-
-
-
 Route::post('/toggleEventStatus/{id}', [EventController::class, 'toggleEventStatus'])->name('toggleEventStatus');
-
-
-
 
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit')->middleware('auth');
 Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
 Route::get('/order_details/{order_id}', [HomeeController::class, 'orderDetails'])->name('order_details');
+
+
+Route::get('updatestatus/{order_id}',[NotificationController::class,'update']);
+Route::get('view_notifications/{order_id}', [NotificationController::class, 'listunreadnotify'])->name('list');

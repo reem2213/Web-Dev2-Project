@@ -15,7 +15,30 @@
 </head>
 
 <body>
+
+
+
 @extends('layouts.app')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <div class="sidebar">
         <h2>Welcome Back<br> Admin <i class='bx bxs-smile'></i></h2>

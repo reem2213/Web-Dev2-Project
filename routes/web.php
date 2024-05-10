@@ -153,7 +153,13 @@ Route::get('activatestore/{id}', [activatestore::class, 'activate']);
 Route::get('deactivatestore/{id}', [admindashboardcontroller::class, 'deactivatedStores']);
 Route::resource('request', storerequestcontroller::class);
 
+use App\Http\Controllers\CoinGateController;
 
+//crypto routes
+Route::post('/singlePayment',[CoinGateController::class,'createPayment']); //for crypto currecy
+Route::get('/coin-gate/callback/{?token}',[CoinGateController::class,'callback']); //for crypto currecy
+Route::get('/coin-gate/success',[CoinGateController::class,'paymentSuccess']); //for payment successful in crypto currecy
+Route::get('/coin-gate/cancel',[CoinGateController::class,'paymentCancel']); //for payment failed in crypto currency
 
 //chatbot
 Route::match(['get','post'],'botman',[BotmanController::class,'handle']);

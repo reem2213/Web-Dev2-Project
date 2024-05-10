@@ -153,6 +153,12 @@
         <button type="submit">Complete</button>
     </form>
 
+    <form action="{{url('singlePayment')}}" method="post" class="pay">
+        @csrf
+        <input type="text" name="products" value="{{$cart}}" style="display: none">
+        <button type="submit">Complete with crypto</button>
+    </form>
+
     {{-- Check if store_id is set, if not, you might want to set a default or handle differently --}}
     @php
     $store_id = $store_id ?? 'default_store_id'; // Set to a default or manage how you wish

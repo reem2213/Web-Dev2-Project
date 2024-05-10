@@ -154,34 +154,72 @@ class EventController extends Controller
             return response()->json(['error' => 'Server error', 'message' => $ex->getMessage()], 500);
         }
     }
+    
+
     public function toggleEventStatus(Request $request, $id)
-    {
-        try {
-            // Authorize that the user is a seller
-            if (auth()->user()->role !== 'seller') {
-                return redirect()->back()->with('error', 'Unauthorized access.');
+{
+    try {
+        // Authorize that the user is a seller
+        if (auth()->user()->role !== 'seller') {
+            return redirect()->back()->with('error', 'Unauthorized access.');
+        }
+
+        $group = Group::findOrFail($id);
+
+        // Determine the action based on the current status
+        if ($group->status === 'open') {
+            $group->status = 'closed';
+            $message = 'Event closed successfully!';
+
+            // Retrieve all messages and find the largest number
+            $largestNumber = $this->findLargestNumberInMessages($group->id);
+            // Optional: Perform an action with the largest number
+            $this->performActionWithNumber($largestNumber);
+            
+        } else {
+            $group->status = 'open';
+            $message = 'Event opened successfully!';
+        }
+
+        $group->save();
+
+        // Redirect with success message
+        return redirect()->back()->with('success', $message);
+    } catch (ModelNotFoundException $e) {
+        return redirect()->back()->with('error', 'Event not found.');
+    } catch (Exception $e) {
+        return redirect()->back()->with('error', 'An error occurred while updating the event status.');
+    }
+}
+
+// Helper method to find the largest number in messages
+protected function findLargestNumberInMessages($groupId)
+{
+    $messages = Message::where('group_id', $groupId)->get();
+    $largestNumber = null;
+
+    foreach ($messages as $message) {
+        preg_match_all('/\d+/', $message->message, $numbers);
+        $numbers = array_map('intval', $numbers[0]);
+        if (!empty($numbers)) {
+            $currentMax = max($numbers);
+            if ($largestNumber === null || $currentMax > $largestNumber) {
+                $largestNumber = $currentMax;
             }
-    
-            $group = Group::findOrFail($id);
-    
-            // Toggle the event status
-            if ($group->status === 'open') {
-                $group->status = 'closed';
-                $message = 'Event closed successfully!';
-            } else {
-                $group->status = 'open';
-                $message = 'Event opened successfully!';
-            }
-    
-            $group->save();
-    
-            // Redirect with success message
-            return redirect()->back()->with('success', $message);
-        } catch (ModelNotFoundException $e) {
-            return redirect()->back()->with('error', 'Event not found.');
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred while updating the event status.');
         }
     }
+
+    return $largestNumber;
+}
+
+// Optional: A method to perform an action with the found number
+protected function performActionWithNumber($number)
+{
+    if ($number !== null) {
+        // Implement logic depending on what needs to be done with the number
+        Log::info('Performing action with the largest number: ' . $number);
+    }
+}
+
     
 }

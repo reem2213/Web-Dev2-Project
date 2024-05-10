@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Http;
 use App\Models\OrderDetails;
 use App\Models\Order;
+use App\Models\ShoppingCart;
 
 
 class StripePaymentController extends Controller
@@ -70,6 +71,10 @@ class StripePaymentController extends Controller
                 'order_id'=> $myorder->id,
             ]);
         }
+
+        $mystoreid=$productsArray[0]['product']['store_id'];
+ 
+        ShoppingCart::where('user_id',$user->id)->where('store_id', $mystoreid)->delete();
 
 
 

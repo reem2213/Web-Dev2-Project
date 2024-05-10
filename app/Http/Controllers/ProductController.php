@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Store;
 use App\Models\Order;
+use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -220,5 +221,17 @@ class ProductController extends Controller
 
         return back();
 
+    }
+    public function storerevenue(int $id){
+        $user = auth()->user();
+        $sellerId=$user->id;
+        $orders=Order::all();
+        $orderdetails=OrderDetails::all();
+        $totalAmounts = Order::selectRaw('SUM(total_amount) as total_amount')
+                            ->groupBy('user_id')
+                            ->pluck('total_amount');
+ 
+ 
+        return view('sellercategory.store_revenue',compact('sellerId','id','orders','orderdetails','totalAmounts'));
     }
 }

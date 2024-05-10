@@ -24,6 +24,7 @@ use App\Http\Controllers\admindashboardcontroller;
 use App\Http\Controllers\storerequestcontroller;
 use App\Http\Controllers\activatestore;
 use App\Http\Controllers\BotmanController;
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\StripePaymentController;
 
@@ -212,3 +213,10 @@ Route::get('/order_details/{order_id}', [HomeeController::class, 'orderDetails']
 
 Route::get('updatestatus/{order_id}',[NotificationController::class,'update']);
 Route::get('view_notifications/{order_id}', [NotificationController::class, 'listunreadnotify'])->name('list');
+
+
+
+
+Route::get('store_revenue/{id}', [ProductController::class, 'storerevenue']);
+//best seller product
+Route::get('best_seller/{id}', [ChartController::class, 'productData']);

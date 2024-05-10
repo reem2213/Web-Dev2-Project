@@ -23,8 +23,8 @@
                 <span class="menu_option choosen"><a href="{{url('enter_store/'.$id)}}" id="chose"><i class="fa-solid fa-box"></i> Products</a></span>
                 <span class="menu_option" id="go_create_product" ><a href="{{url('store_create_products/'.$id)}}"><i class="fa-solid fa-plus"></i> Create Product</a></span>
                 {{-- <span class="menu_option" id="menu_option"><i class="fa-solid fa-cart-shopping"></i> Orders</span> --}}
-                <span class="menu_option" id="menu_option"><i class="fa-solid fa-arrow-up"></i> Revenue</span>
-                <span class="menu_option" id="menu_option"><i class="fa-solid fa-boxes-stacked"></i> Best Product</span>
+                <span class="menu_option" id="menu_option"><a href="{{url('store_revenue/'.$id)}}"><i class="fa-solid fa-arrow-up"></i> Revenue</a></span>
+                <span class="menu_option " id="menu_option"><a href="{{url('best_seller/'.$id)}}"><i class="fa-solid fa-boxes-stacked"></i> Best Product</a></span>
                 <span class="menu_option" id="menu_option"><a href="{{url('enter_store_setting/'.$id)}}"><i class="fa-solid fa-gear"></i> Setting</a></span>
                 <span class="menu_option" id="menu_option"></span>
             </div>

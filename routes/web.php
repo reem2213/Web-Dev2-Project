@@ -154,6 +154,7 @@ Route::get('deactivatestore/{id}', [admindashboardcontroller::class, 'deactivate
 Route::resource('request', storerequestcontroller::class);
 
 use App\Http\Controllers\CoinGateController;
+use App\Http\Controllers\ProfileController;
 
 //crypto routes
 Route::post('/singlePayment',[CoinGateController::class,'createPayment']); //for crypto currecy
@@ -209,3 +210,6 @@ Route::post('/toggleEventStatus/{id}', [EventController::class, 'toggleEventStat
 
 
 
+
+Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit')->middleware('auth');
+Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');

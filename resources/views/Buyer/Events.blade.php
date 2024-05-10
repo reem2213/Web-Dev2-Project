@@ -1,7 +1,37 @@
-<h1>Events</h1>
-@foreach($events as $event)
-    <div class="event">
-        <h2>{{ $event->name }}</h2>
-        
+@extends('layouts.app')
+
+@section('content')
+
+
+<!-- in baraye chat -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="user-wrapper">
+                <ul class="users" style='text-align: center;'>
+                    @foreach($users as $user)
+                    <li class="user" id="{{ $user->id }}">
+
+                        <div class="media-body">
+                            <p class="name">{{ $user->name }}</p>
+
+
+                        </div>
+
+                    </li>
+                    @endforeach
+                 
+
+
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="col-md-8" id="messages">
+
+        </div>
     </div>
-@endforeach
+</div>
+
+@endsection

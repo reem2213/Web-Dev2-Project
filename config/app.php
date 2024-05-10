@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Laravel\ServiceProvider;
+
 return [
 
     /*
@@ -117,6 +119,21 @@ return [
     | Supported drivers: "file", "cache"
     |
     */
+
+
+    'providers' => ServiceProvider::defaultProviders()->merge([
+        /*
+         * Package Service Providers...
+         */
+
+        /*
+         * Application Service Providers...
+         */
+        App\Providers\AppServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
+    ])->toArray(),
 
     'maintenance' => [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),

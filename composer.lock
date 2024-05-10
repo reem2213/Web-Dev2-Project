@@ -4,7 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "073a83d713d67d4348935bd8723eee6e",
+
+    "content-hash": "6a28cda004757e32bdf27688fe4552d3",
+
     "packages": [
         {
             "name": "botman/botman",
@@ -2394,6 +2396,7 @@
             "time": "2023-10-27T15:32:31+00:00"
         },
         {
+
             "name": "mpociot/pipeline",
             "version": "1.0.2",
             "source": {
@@ -2442,6 +2445,7 @@
             "time": "2017-04-21T13:22:05+00:00"
         },
         {
+
             "name": "munafio/chatify",
             "version": "v1.6.3",
             "source": {
@@ -3846,6 +3850,68 @@
         {
             "name": "ralouphie/getallheaders",
             "version": "3.0.3",
+
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pusher/pusher-http-php.git",
+                "reference": "de2f72296808f9cafa6a4462b15a768ff130cddb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pusher/pusher-http-php/zipball/de2f72296808f9cafa6a4462b15a768ff130cddb",
+                "reference": "de2f72296808f9cafa6a4462b15a768ff130cddb",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^7.2",
+                "paragonie/sodium_compat": "^1.6",
+                "php": "^7.3|^8.0",
+                "psr/log": "^1.0|^2.0|^3.0"
+            },
+            "require-dev": {
+                "overtrue/phplint": "^2.3",
+                "phpunit/phpunit": "^9.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pusher\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Library for interacting with the Pusher REST API",
+            "keywords": [
+                "events",
+                "messaging",
+                "php-pusher-server",
+                "publish",
+                "push",
+                "pusher",
+                "real time",
+                "real-time",
+                "realtime",
+                "rest",
+                "trigger"
+            ],
+            "support": {
+                "issues": "https://github.com/pusher/pusher-http-php/issues",
+                "source": "https://github.com/pusher/pusher-http-php/tree/7.2.4"
+            },
+            "time": "2023-12-15T10:58:53+00:00"
+        },
+        {
+            "name": "ralouphie/getallheaders",
+            "version": "3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ralouphie/getallheaders.git",
@@ -4069,6 +4135,7 @@
             "time": "2023-11-08T05:53:05+00:00"
         },
         {
+
             "name": "react/cache",
             "version": "v1.2.0",
             "source": {
@@ -4581,6 +4648,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/stripe/stripe-php/zipball/cc4108812a0b6db06041e520fe340f6d8ecfeff1",
                 "reference": "cc4108812a0b6db06041e520fe340f6d8ecfeff1",
+
                 "shasum": ""
             },
             "require": {
@@ -4624,9 +4692,10 @@
             ],
             "support": {
                 "issues": "https://github.com/stripe/stripe-php/issues",
-                "source": "https://github.com/stripe/stripe-php/tree/v14.6.0"
+                "source": "https://github.com/stripe/stripe-php/tree/v14.5.0"
             },
-            "time": "2024-05-09T19:39:17+00:00"
+            "time": "2024-05-02T20:56:57+00:00"
+
         },
         {
             "name": "symfony/clock",

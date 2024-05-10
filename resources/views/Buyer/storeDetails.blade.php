@@ -26,6 +26,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+<style>
+    .msg_seller{
+        width: 50px;
+        height: 50px;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        margin: 30px;
+    }
+</style>
+
 </head>
 
 <body>
@@ -47,7 +58,7 @@
         <ion-icon name="close-outline"></ion-icon>
       </button>
 
-      
+
 
 
 
@@ -355,6 +366,9 @@
             </div>
             <a href="{{ route('stores') }}">Back</a>
 
+            <a href="{{url('chatify/'.$store->user_id)}}">
+                <img src="{{asset('assets\buyer\chat1.png')}}" alt="" class="msg_seller">
+            </a>
 
             <section>
                 <h1 class="myStoresTitle">MY STORE Details</h1>

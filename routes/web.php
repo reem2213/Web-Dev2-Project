@@ -20,15 +20,67 @@ use App\Http\Controllers\Buyer\CartController;
 use App\Http\Controllers\Buyer\HomeeController;
 use App\Http\Controllers\Buyer\StoreController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\admindashboardcontroller;
-use App\Http\Controllers\storerequestcontroller;
-use App\Http\Controllers\activatestore;
-use App\Http\Controllers\BotmanController;
-use App\Http\Controllers\EventController;
+use App\Http\Controllers\StripePaymentController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::controller(StripePaymentController::class)->group(function () {
+    Route::get('stripe','stripe')->name('stripe.index');
+    Route::post('stripe/checkout','stripeCheckout')->name('stripe.checkout');
+    Route::get('stripe/checkout/success','stripeCheckoutSuccess')->name('stripe.checkout.success');
+});
+
+
 
 Auth::routes([
     'verify' => true
 ]);
+
+
+
+Route::get('/homee', [HomeeController::class, 'index'])->name('home');
+Route::get('/refresh_shoppingcart', [CartController::class, 'refresh_shoppingcart']);
+
+
+Route::get('/welcome', [HomeeController::class, 'anotherPage'])->name('welcome');
+Route::get('/events', [HomeeController::class, 'eventPage'])->name('events');
+Route::get('/orders', [HomeeController::class, 'orderPage'])->name('orders');
+Route::get('/stores', [StoreController::class, 'index'])->name('stores');
+Route::get('/stores/{id}', [StoreController::class, 'show'])->name('store.show');
+
+Route::get('/contactUs', [HomeeController::class, 'contactUsPage'])->name('contactUs');
+Route::get('/cart', [HomeeController::class, 'shoppingCart'])->name('cart');
+Route::get('/profile', [HomeeController::class, 'profile'])->name('profile');
+Route::get('/notifications', [HomeeController::class, 'notification'])->name('notifications');
+
+
+
+
+
+
+
+Route::post('/cart/add/{product}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart/{store_id}', [CartController::class, 'showCart'])->name('cart.show');
+Route::patch('/cart/update/{id}', [CartController::class, 'updateCart'])->name('cart.update');
+
+Route::delete('/cart/{store_id}/{product_id}', [CartController::class, 'deleteCartItem'])->name('cart.delete');
+
+use App\Http\Controllers\Auth\ProviderController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\BuyerMiddleware;
+use App\Http\Middleware\SellerMiddleware;
+use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
+use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', function () {
     return view('welcome');
@@ -53,6 +105,7 @@ Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback'])
 
 Route::get('/events', [HomeeController::class, 'eventPage'])->name('events');
 Route::get('/orders', [HomeeController::class, 'orderPage'])->name('orders');
+Route::get('/order_details/{order_id}', [HomeeController::class, 'orderDetails'])->name('order_details');
 Route::get('/stores', [StoreController::class, 'index'])->name('stores');
 Route::get('/stores/{id}', [StoreController::class, 'show'])->name('store.show');
 Route::get('/contactUs', [HomeeController::class, 'contactUsPage'])->name('contactUs');
@@ -91,6 +144,8 @@ Route::get('stop_order/{order_id}', [SellerController::class, 'stop_order']);
 Route::get('start_order/{order_id}', [SellerController::class, 'start_order']);
 //stop an order have been started
 Route::get('reject_order/{order_id}', [SellerController::class, 'reject_order']);
+//update seller info
+Route::put('update_seller_info', [SellerController::class, 'update_seller_info']);
 
 
 /*=========================Seller store main page/*=========================*/

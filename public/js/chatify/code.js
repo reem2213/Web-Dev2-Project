@@ -239,13 +239,14 @@ function cssMediaQueries() {
  */
 let app_modal = function ({
   show = true,
-  name,
+  username,
   data = 0,
   buttons = true,
   header = null,
   body = null,
 }) {
-  const modal = $(".app-modal[data-name=" + name + "]");
+  const modal = $(".app-modal[data-name=" + username + "]");
+
   // header
   header ? modal.find(".app-modal-header").html(header) : "";
 
@@ -260,12 +261,13 @@ let app_modal = function ({
   // show / hide
   if (show == true) {
     modal.show();
-    $(".app-modal-card[data-name=" + name + "]").addClass("app-show-modal");
-    $(".app-modal-card[data-name=" + name + "]").attr("data-modal", data);
+    $(".app-modal-card[data-name=" + username + "]").addClass("app-show-modal");
+    $(".app-modal-card[data-name=" + username + "]").attr("data-modal", data);
   } else {
     modal.hide();
-    $(".app-modal-card[data-name=" + name + "]").removeClass("app-show-modal");
-    $(".app-modal-card[data-name=" + name + "]").attr("data-modal", data);
+    $(".app-modal-card[data-name=" + username + "]").removeClass("app-show-modal");
+    $(".app-modal-card[data-name=" + username + "]").attr("data-modal", data);
+
   }
 };
 
@@ -412,8 +414,9 @@ function IDinfo(id) {
         // focus on messaging input
         messageInput.focus();
         // update info in view
-        $(".messenger-infoView .info-name").text(data.fetch.name);
-        $(".m-header-messaging .user-name").text(data.fetch.name);
+        $(".messenger-infoView .info-name").text(data.fetch.username);
+        $(".m-header-messaging .user-name").text(data.fetch.username);
+
         // Star status
         data.favorite > 0
           ? $(".add-to-favorite").addClass("favorite")

@@ -45,7 +45,7 @@
         </div>
         <div class="work-side">
             {{-- <span class="create-store-btn">+ Create New Store</span> --}}
-            <button class="button-85 button-851" id="create_new_event"><a href="{{url('create_events/'.$id)}}"> + Create New Event</a></button>
+            {{-- <button class="button-85 button-851" id="create_new_event"><a href="{{url('create_events/'.$id)}}"> + Create New Event</a></button> --}}
             {{-- <button class="button-85" id="create_new_store"><a href="{{url('mystore/create/'.$id)}}"> + Create New Store</a></button> --}}
             <div class="circle-avatar"></div>
 
@@ -53,7 +53,82 @@
     </div>
     {{-----------------------------------body-----------------------------------}}
     <div class="profile_body">
+        <div class="illustration">
+            <div>
+                <p class="welcome_name">
+                    Welcome <br>
+                    {{$seller->username}}
+                </p>
+                <span class="welcome_text">
+                    Welcome to MultiStore, the thriving hub where your products<br>
+                    meet their future owners! We are thrilled to have you join our<br>
+                    community of innovative sellers.
+                </span>
+            </div>
 
+            <img src="{{asset('assets\images\ecomillust.png')}}" alt="" class="illustration_img">
+        </div>
+        <div class="seller_profile_cards">
+            <div class="seller_profile_card seller_profile_card_main">
+                <i class="fa-solid fa-inbox seller_profile_total_stores_icon"></i>
+                <span class="seller_profile_total_stores">Total Stores: 34</span>
+                <span class="seller_profile_create_store">
+                    + Create Store
+                </span>
+            </div>
+            <div class="seller_profile_card"></div>
+            <div class="seller_profile_card"></div>
+        </div>
+        <form action="{{url('/update_seller_info')}}" method="POST" enctype="multipart/form-data" class="seller_update_profile">
+            @csrf
+            @method('PUT')
+            <div class="input_container">
+                <div class="update_seller_input">
+                <label for="">Name:</label>
+                <input type="text" name="username" class="form-control" value="{{$seller->username}}">
+                @error('username')
+                    <h4 class="alert">{{$message}}</h4>
+                @enderror
+                </div>
+
+                <div class="update_seller_input">
+                    <label for="">PhoneNo:</label>
+                    <input name="phoneNo" class="form-control" value='{{$seller->phoneNo}}'>
+                    @error('phoneNo')
+                        <h4 class="alert">{{$message}}</h4>
+                    @enderror
+                </div>
+            </div>
+            <div class="input_container">
+                <div class="update_seller_input">
+                <label for="">Email:</label>
+                <input name="email" class="form-control" value='{{$seller->email}}'>
+                @error('email')
+                    <h4 class="alert">{{$message}}</h4>
+                @enderror
+                </div>
+
+                <div class="update_seller_input">
+                    <label for="">Password:</label>
+                    <input name="password" class="form-control" value="{{$seller->password}}">
+                    @error('password')
+                        <h4 class="alert">{{$message}}</h4>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="update_seller_input_img">
+                <label for="">Upload Image</label>
+                <input type="file" name="image" class="form-control">
+                @error('image')
+                    <h4 class="alert">{{$message}}</h4>
+                @enderror
+            </div>
+
+            <div class="update_seller">
+                <button type="submit">Update</button>
+            </div>
+        </form>
     </div>
 
 

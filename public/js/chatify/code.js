@@ -246,6 +246,7 @@ let app_modal = function ({
   body = null,
 }) {
   const modal = $(".app-modal[data-name=" + username + "]");
+
   // header
   header ? modal.find(".app-modal-header").html(header) : "";
 
@@ -266,6 +267,7 @@ let app_modal = function ({
     modal.hide();
     $(".app-modal-card[data-name=" + username + "]").removeClass("app-show-modal");
     $(".app-modal-card[data-name=" + username + "]").attr("data-modal", data);
+
   }
 };
 
@@ -414,6 +416,7 @@ function IDinfo(id) {
         // update info in view
         $(".messenger-infoView .info-name").text(data.fetch.username);
         $(".m-header-messaging .user-name").text(data.fetch.username);
+
         // Star status
         data.favorite > 0
           ? $(".add-to-favorite").addClass("favorite")

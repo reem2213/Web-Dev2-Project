@@ -1,23 +1,41 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+
+
+
+
+<!-- in baraye chat -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="user-wrapper">
+                <ul class="users" style='text-align: center;'>
+                    @foreach($users as $user)
+                    <li class="user" id="{{ $user->id }}">
+
+                        <div class="media-body">
+                            <p class="name">{{ $user->name }}</p>
+
+
                         </div>
-                    @endif
 
-                    {{ __('You are logged in!') }}
-                </div>
+                    </li>
+                    @endforeach
+                 
+
+
+
+                </ul>
+
             </div>
+        </div>
+
+        <div class="col-md-8" id="messages">
+
         </div>
     </div>
 </div>
+
 @endsection

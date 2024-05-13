@@ -27,6 +27,12 @@
             margin: 20px;
         }
 
+        .shopping_cart_img{
+            width: 50px;
+            height: 50px;
+            border-radius: 20px;
+        }
+
 
     </style>
 </head>
@@ -57,7 +63,7 @@
         <tr>
             <td>
                 @if($item->product && $item->product->image)
-                <img src="{{$item->product->image}}" />
+                <img src="{{asset($item->product->image)}}" class="shopping_cart_img"/>
                 @endif
             </td>
             <td>
